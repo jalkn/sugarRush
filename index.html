@@ -13,11 +13,6 @@
         .bg-custom-gradient {
             background: linear-gradient(135deg, #fffcf9 0%, #fff1e6 100%);
         }
-        /* Estilo para el contenedor de banners */
-        .banner-slider {
-            aspect-ratio: 16 / 6;
-            background-color: #ffe7d1;
-        }
     </style>
 </head>
 <body class="bg-custom-gradient text-gray-800">
@@ -30,17 +25,6 @@
         </div>
         <p class="text-3xl text-orange-600 font-medium italic tracking-tight">Un Instante de dulzura.</p>
     </header>
-
-    <section class="max-w-6xl mx-auto px-6 mt-8">
-        <div class="banner-slider w-full rounded-[2.5rem] shadow-inner overflow-hidden relative flex items-center justify-center border-2 border-white">
-            <img src="img/banner_principal.jpg" alt="Promoción del mes" class="w-full h-full object-cover">
-            <div class="absolute bottom-4 flex gap-2">
-                <div class="w-3 h-3 bg-white rounded-full opacity-100"></div>
-                <div class="w-3 h-3 bg-white rounded-full opacity-50"></div>
-                <div class="w-3 h-3 bg-white rounded-full opacity-50"></div>
-            </div>
-        </div>
-    </section>
 
     <main class="max-w-6xl mx-auto p-6 mt-8">
         
@@ -135,7 +119,7 @@
 
     <script>
         function orderSweet(product, price) {
-            const phoneNumber = "573243770041"; // Configura el WhatsApp aquí
+            const phoneNumber = "573243770041";
             const message = `¡Hola! Me gustaría pedir: ${product} (${price})`;
             window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
         }
