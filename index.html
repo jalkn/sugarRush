@@ -10,7 +10,9 @@
         body { font-family: 'Quicksand', sans-serif; }
         .product-card { transition: transform 0.2s ease; }
         .product-card:hover { transform: scale(1.02); }
-        .bg-custom-gradient { background: linear-gradient(135deg, #fffcf9 0%, #fff1e6 100%); }
+        .bg-custom-gradient {
+            background: linear-gradient(135deg, #fffcf9 0%, #fff1e6 100%);
+        }
     </style>
 </head>
 <body class="bg-custom-gradient text-gray-800">
@@ -22,36 +24,46 @@
             </div>
         </div>
         <p class="text-3xl text-orange-600 font-medium italic tracking-tight">Un Instante de dulzura.</p>
+        
+        <div class="flex justify-center gap-4 mt-8">
+            <a href="https://www.instagram.com/_sugarrush.world" target="_blank" class="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-5 py-2 rounded-full font-bold text-sm shadow-md hover:opacity-90 transition">
+                <span>Instagram</span>
+            </a>
+            <a href="https://wa.me/573243770474" target="_blank" class="flex items-center gap-2 bg-green-500 text-white px-5 py-2 rounded-full font-bold text-sm shadow-md hover:bg-green-600 transition">
+                <span>WhatsApp</span>
+            </a>
+        </div>
     </header>
 
     <main class="max-w-6xl mx-auto p-6 mt-8">
         
         <section class="mb-16 bg-gradient-to-br from-green-50 to-emerald-50 rounded-[3rem] border border-green-100 shadow-inner overflow-hidden">
-            <div class="text-center py-10">
+            <div class="text-center py-10 px-4">
                 <span class="bg-green-200 text-green-800 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Colaboración con Zenergy</span>
                 <h2 class="text-4xl font-bold text-green-900 mt-4 mb-2">BioRush <span class="text-green-600 italic">Energy</span></h2>
-                <p class="text-green-700/70 italic text-lg">Batidos funcionales con hongos adaptógenos de Santa Elena.</p>
+                <p class="text-green-700/70 italic text-lg">Batidos funcionales con hongos adaptógenos para el alto rendimiento.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-8 pb-12">
-                <div class="bg-white/90 backdrop-blur p-6 rounded-[2rem] shadow-sm border border-green-100 flex gap-4 items-center">
-                    <div class="text-4xl">🚀</div>
-                    <div class="flex-grow">
-                        <h3 class="text-lg font-bold text-green-900">BioRush Stamina</h3>
-                        <p class="text-gray-500 text-xs mb-3">Cordyceps + Remolacha + Maní. Fuerza física extrema.</p>
+                <div class="bg-white/90 backdrop-blur p-6 rounded-[2rem] shadow-sm border border-green-100 flex flex-col sm:flex-row gap-6 items-center">
+                    <div class="text-5xl bg-green-100 w-20 h-20 rounded-2xl flex items-center justify-center flex-shrink-0">🚀</div>
+                    <div class="flex-grow text-center sm:text-left">
+                        <h3 class="text-xl font-bold text-green-900">BioRush Stamina</h3>
+                        <p class="text-gray-500 text-sm mb-4">Cordyceps + Remolacha + Maní. Fuerza física y resistencia para la jornada.</p>
                         <div class="flex justify-between items-center">
-                            <span class="font-bold text-green-700">$10.000</span>
-                            <button onclick="orderSweet('BioRush Stamina', '$10.000')" class="bg-green-600 text-white px-4 py-1 rounded-full text-xs font-bold">Pedir</button>
+                            <span class="text-xl font-bold text-green-700">$10.000</span>
+                            <button onclick="orderSweet('BioRush Stamina', '$10.000')" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-full font-bold transition shadow-md">Pedir</button>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white/90 backdrop-blur p-6 rounded-[2rem] shadow-sm border border-green-100 flex gap-4 items-center">
-                    <div class="text-4xl">🧠</div>
-                    <div class="flex-grow">
-                        <h3 class="text-lg font-bold text-green-900">BioRush Focus</h3>
-                        <p class="text-gray-500 text-xs mb-3">Melena + Arándanos + Avena. Enfoque mental total.</p>
+
+                <div class="bg-white/90 backdrop-blur p-6 rounded-[2rem] shadow-sm border border-green-100 flex flex-col sm:flex-row gap-6 items-center">
+                    <div class="text-5xl bg-blue-50 w-20 h-20 rounded-2xl flex items-center justify-center flex-shrink-0">🧠</div>
+                    <div class="flex-grow text-center sm:text-left">
+                        <h3 class="text-xl font-bold text-green-900">BioRush Focus</h3>
+                        <p class="text-gray-500 text-sm mb-4">Melena de León + Arándanos + Avena. Claridad mental y enfoque total.</p>
                         <div class="flex justify-between items-center">
-                            <span class="font-bold text-green-700">$10.000</span>
-                            <button onclick="orderSweet('BioRush Focus', '$10.000')" class="bg-green-600 text-white px-4 py-1 rounded-full text-xs font-bold">Pedir</button>
+                            <span class="text-xl font-bold text-green-700">$10.000</span>
+                            <button onclick="orderSweet('BioRush Focus', '$10.000')" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-full font-bold transition shadow-md">Pedir</button>
                         </div>
                     </div>
                 </div>
@@ -62,24 +74,103 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div class="product-card bg-white p-6 rounded-[2rem] shadow-md border border-orange-50">
                 <div class="h-48 bg-orange-100 rounded-2xl mb-4 overflow-hidden">
+                    <img src="img/alfajores_x5.jpg" alt="Alfajores x5" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-bold">Alfajores x5</h3>
+                <p class="text-gray-500 text-sm mb-4">Clásicos y suaves, perfectos para un antojo personal.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-xl font-bold text-orange-700">$16.000</span>
+                    <button onclick="orderSweet('Alfajores x5', '$16.000')" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-bold transition shadow-md">Pedir</button>
+                </div>
+            </div>
+
+            <div class="product-card bg-white p-6 rounded-[2rem] shadow-lg border-2 border-orange-300 relative">
+                <span class="absolute -top-3 right-6 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">RECOMENDADO</span>
+                <div class="h-48 bg-orange-100 rounded-2xl mb-4 overflow-hidden">
                     <img src="img/alfajores_x6.png" alt="Alfajores x6" class="w-full h-full object-cover">
                 </div>
-                <h3 class="text-xl font-bold">Alfajores x6 Variados</h3>
-                <div class="flex justify-between items-center mt-4">
+                <h3 class="text-xl font-bold">Alfajores x6</h3>
+                <p class="text-gray-500 text-sm mb-4">Variados: Maní x2, Coco x2, Leche en Polvo x2.</p>
+                <div class="flex justify-between items-center">
                     <span class="text-xl font-bold text-orange-700">$20.000</span>
-                    <button onclick="orderSweet('Alfajores x6 Variados', '$20.000')" class="bg-orange-600 text-white px-6 py-2 rounded-full font-bold">Pedir</button>
+                    <button onclick="orderSweet('Alfajores x6 Variados', '$20.000')" class="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-full font-bold transition shadow-md">Pedir</button>
                 </div>
             </div>
+
+            <div class="product-card bg-white p-6 rounded-[2rem] shadow-md border border-orange-50">
+                <div class="h-48 bg-orange-100 rounded-2xl mb-4 overflow-hidden">
+                    <img src="img/alfajores_x50.png" alt="Pack x50" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-bold">Alfajores x50</h3>
+                <p class="text-gray-500 text-sm mb-4">La dosis ideal de dulzura para tus eventos.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-xl font-bold text-orange-700">$100.000</span>
+                    <button onclick="orderSweet('Pack Alfajores x50', '$100.000')" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-bold transition shadow-md">Pedir</button>
+                </div>
             </div>
+        </div>
+
+        <h2 class="text-2xl font-bold text-orange-900 mb-8 border-l-8 border-pink-400 pl-4">Brownies & Tortas</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            <div class="product-card bg-white p-6 rounded-[2rem] shadow-md border border-orange-50">
+                <div class="h-48 bg-orange-100 rounded-2xl mb-4 overflow-hidden">
+                    <img src="img/brownies_x50.png" alt="Pack Brownies x50" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-bold">Brownies x50</h3>
+                <p class="text-gray-500 text-sm mb-4">Melcochudos y con el toque justo de cacao. ¡Ideal para compartir!</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-xl font-bold text-orange-700">$100.000</span>
+                    <button onclick="orderSweet('Pack Brownies x50', '$100.000')" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-bold transition shadow-md">Pedir</button>
+                </div>
+            </div>
+
+            <div class="product-card bg-pink-50/50 p-6 rounded-[2rem] shadow-lg border border-pink-200">
+                <div class="h-48 bg-pink-100 rounded-2xl mb-4 overflow-hidden">
+                    <img src="img/torta_marialuisa.png" alt="Torta Maria Luisa" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-bold text-pink-900">Torta María Luisa</h3>
+                <p class="text-pink-700/70 text-sm mb-4">Tradicional bizcochuelo con mora y arequipe.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-xl font-bold text-pink-700">$45.000</span>
+                    <button onclick="orderSweet('Torta Maria Luisa', '$45.000')" class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full font-bold transition shadow-md">Pedir</button>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-bold text-orange-900 mb-8 border-l-8 border-yellow-400 pl-4">Lasañas Artesanales</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div class="product-card bg-white p-6 rounded-[2rem] shadow-md border border-yellow-100">
+                <div class="h-48 bg-yellow-50 rounded-2xl mb-4 overflow-hidden">
+                    <img src="img/lasagna_pollo.png" alt="Lasaña de Pollo" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-bold">Lasaña de Pollo</h3>
+                <p class="text-gray-500 text-sm mb-4">Pollo, queso, salsa bechamel y pasta artesanal. (14 x 11.5 cm)</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-xl font-bold text-orange-700">$20.000</span>
+                    <button onclick="orderSweet('Lasaña de Pollo', '$20.000')" class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-full font-bold transition shadow-md">Pedir</button>
+                </div>
+            </div>
+        </div>
 
     </main>
 
     <footer class="py-16 text-center text-orange-300 text-sm">
-        <p class="font-bold text-orange-900 text-lg mb-4">¿Tienes dudas?</p>
-        <div class="flex justify-center gap-6">
-            <a href="https://wa.me/573243770474" target="_blank" class="text-green-600 font-bold hover:underline">+57 324 3770474</a>
+        <div class="flex flex-col items-center gap-2 mb-4">
+            <p class="font-bold text-orange-900 text-lg">¿Tienes dudas?</p>
+            <div class="flex gap-4">
+                <a href="https://www.instagram.com/_sugarrush.world" target="_blank" class="text-pink-600 hover:underline">@_sugarrush.world</a>
+                <span class="text-orange-200">|</span>
+                <a href="https://wa.me/573243770474" target="_blank" class="text-green-600 hover:underline">+57 324 3770474</a>
+            </div>
         </div>
-        <p class="mt-8">© 2026 Sugar Rush | Hecho en Santa Elena</p>
+        <p>© 2026 Sugar Rush Repostería</p>
+        <p class="mt-1">Hecho con amor en Santa Elena, Antioquia.</p>
+        
+        <div class="mt-8">
+            <a href="https://sugarrush.streamlit.app" target="_blank" class="bg-gray-100 text-gray-400 px-4 py-1 rounded-full text-xs hover:bg-orange-100 hover:text-orange-500 transition shadow-inner">
+                Acceso Admin
+            </a>
+        </div>
     </footer>
 
     <script>
