@@ -4,16 +4,14 @@
     <meta charset="UTF-8">
     <link class="icon" type="image/png" href="img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BIORUSH.WORLD</title>
+    <title>SUGARRUSH.WORLD</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = { 
             theme: { 
                 extend: { 
-                    screens: {
-                        'xs': '400px',
-                    },
+                    screens: { 'xs': '400px' },
                     colors: { 'jako-black': '#0a0705' },
                     fontFamily: { 
                         'sans': ['Orbitron', 'sans-serif'],
@@ -31,28 +29,18 @@
             letter-spacing: 0.05em; 
             background-color: #0a0705;
         } 
-
         #page-bg-overlay, #sugar-bg-overlay {
             position: fixed;
             inset: 0;
             z-index: -1;
             transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        #page-bg-overlay {
-            background: radial-gradient(circle at 50% 50%, #035d3f 0%, #272625 100%);
-        }
-
-        #sugar-bg-overlay {
-            background: radial-gradient(circle at 50% 50%, #4a0e4e 0%, #0f0212 100%);
-        }
-
+        #page-bg-overlay { background: radial-gradient(circle at 50% 50%, #4a0e4e 0%, #0f0212 100%); }
+        #sugar-bg-overlay { background: radial-gradient(circle at 50% 50%, #035d3f 0%, #272625 100%); }
         .img-glow-transition {
             transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             will-change: filter, transform, opacity;
         }
-
-        /* Ocultar scrollbars manteniendo funcionalidad */
         .scrollbar-none::-webkit-scrollbar { display: none; }
         .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
@@ -67,114 +55,23 @@
 
         <header class="w-full bg-gradient-to-b from-black/90 via-black/40 to-transparent backdrop-blur-md shrink-0 z-50">
             <div class="p-4 sm:p-6 grid grid-cols-3 items-center max-w-7xl mx-auto uppercase tracking-widest font-mono text-[9px] text-white/40 min-h-[63px] sm:min-h-[69px] w-full">
-                <div class="justify-self-start flex items-center space-x-3">
-                    <button onclick="toggleSugarDrawer(true)" class="group w-9 h-9 flex items-center justify-center transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Open Sugar Drawer">
-                        <img src="img/back.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" alt="Open Sugar">
+                <div class="justify-self-start flex items-center">
+                    <button onclick="toggleSugarDrawer(true)" class="group w-9 h-9 flex items-center justify-center transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Open Bio Drawer">
+                        <img src="img/back.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" alt="Open Bio">
                     </button>
-                    <span class="font-bold tracking-[0.25em] text-white/50 hidden xs:inline-block"></span>
                 </div>
                 <div class="justify-self-center text-center tracking-[0.25em] font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-white">
-                    <span id="drawer-vault-node">BIORUSH</span>
+                    <span id="drawer-sugar-node">POSTRE1</span>
                 </div>
-                <div class="justify-self-end flex items-center space-x-3">
-                    <button onclick="toggleSugarDrawer(true)" class="group w-9 h-9 flex items-center justify-center transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Open Sugar Drawer">
-                        <img src="img/back.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" alt="Open Sugar">
+                <div class="justify-self-end flex items-center">
+                    <button onclick="toggleSugarDrawer(true)" class="group w-9 h-9 flex items-center justify-center transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Open Bio Drawer">
+                        <img src="img/back.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" alt="Open Bio">
                     </button>
                 </div>
             </div>
         </header>
 
-        <div class="w-full flex-1 overflow-y-auto scrollbar-none flex flex-col items-center py-4 px-4 text-center z-20">
-            
-            <div class="relative w-full max-w-[180px] xs:max-w-[220px] sm:max-w-[280px] md:max-w-[320px] aspect-[13/15] transition-all duration-700 ease-out select-none cursor-pointer hover:-translate-y-1 hover:scale-[1.01] drop-shadow-[0_20px_30px_rgba(0,0,0,0.7)] group mt-auto">
-                <div class="w-full h-full relative overflow-hidden opacity-90 transition-all duration-500 group-hover:opacity-100">
-                    <img id="biorush-pack-img" src="img/biorush.png" alt="BioRush Pack" class="img-glow-transition absolute inset-0 w-full h-full object-contain scale-[1.1] sm:scale-[1.2] pointer-events-none z-0 group-hover:scale-[1.15] sm:group-hover:scale-[1.25]" />
-                    <div class="absolute inset-0 flex items-center justify-center p-[2%] sm:p-[4%] z-10">
-                        <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-white/40 stroke-[1.5] transition-all duration-500 group-hover:stroke-white/60">
-                            <defs>
-                                <path id="textPath-top" d="M 105,200 A 95,95 0 0,1 295,200" />
-                                <path id="textPath-bottom" d="M 105,200 A 95,95 0 0,0 295,200" />
-                            </defs>
-                            <text class="fill-white font-black text-[9px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] uppercase transition-all duration-500">
-                                <textPath id="laser-variant-title" href="#textPath-top" startOffset="50%" text-anchor="middle">
-                                    BIORUSH MENTAL FOCUS
-                                </textPath>
-                            </text>
-                            <g class="opacity-30 stroke-[1.2] origin-center transform scale-75">
-                                <path d="M 110,120 L 290,120 L 110,280 L 290,280 Z" />
-                                <path d="M 110,120 Q 200,150 290,120" />
-                                <path d="M 110,280 Q 200,250 290,280" stroke-dasharray="2 2" />
-                            </g>
-                            <text class="fill-white/60 font-black text-[8px] sm:text-[9px] tracking-[0.25em] uppercase transition-all duration-500 group-hover:fill-white/90">
-                                <textPath href="#textPath-bottom" startOffset="50%" text-anchor="middle">
-                                    BIORUSH.WORLD &bull; 3243770474
-                                </textPath>
-                            </text>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="biorush-variants-container" class="mt-4 mb-3 flex flex-nowrap items-center justify-center gap-1.5 sm:gap-3.5 text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.22em] font-mono select-none z-30 px-1 w-full overflow-x-visible shrink-0">
-                </div>
-            
-            <p id="biorush-description" class="font-mono lowercase text-[8px] sm:text-[8px] text-white/70 max-w-xl tracking-normal font-light mb-3 min-h-[24px] transition-opacity duration-300 px-4 leading-normal shrink-0">
-                Nootrópico de alta optimización cerebral para estados de flujo prolongados.
-            </p>
-
-            <div class="mb-4 flex flex-col items-center justify-center font-mono text-[8px] tracking-widest text-white/50 space-y-1 shrink-0">
-                <span id="biorush-spec">45 CAPS // 500 MGRS</span>
-                <span id="biorush-price" class="text-white font-bold text-[12px] text-emerald-400">$70.000 COP</span>
-            </div>
-
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md relative z-30 px-6 mb-auto shrink-0">
-                <button onclick="adquirirNodo()" class="w-full sm:w-auto px-10 py-3 bg-[#141414]/80 backdrop-blur-md text-white font-black text-[12px] tracking-[0.22em] uppercase rounded-md border border-white/20 hover:border-white/70 hover:bg-[#141414] transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_25px_rgba(255,255,255,0.25)]">
-                    GET INFO
-                </button>
-            </div>
-        </div>
-
-        <footer class="w-full bg-gradient-to-t from-black/90 via-black/40 to-transparent backdrop-blur-md shrink-0 z-50">
-            <div class="p-4 sm:p-6 grid grid-cols-3 items-center max-w-7xl mx-auto uppercase tracking-widest font-mono text-[9px] text-white/40 min-h-[63px] sm:min-h-[69px] w-full">
-                <div class="justify-self-start flex items-center space-x-2 sm:space-x-3 text-left">
-                    <button onclick="toggleSugarDrawer(true)" class="group w-9 h-9 flex items-center justify-center transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Next">
-                        <img src="img/back.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" alt="Back">
-                    </button>
-                    <div id="biorush-items-menu" class="flex items-center space-x-2 sm:space-x-3 pl-2 sm:pl-3 border-l border-white/10">
-                        </div>
-                </div>    
-                <div class="justify-self-center text-center tracking-[0.25em] font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-white/50"></div>
-                <div class="justify-self-end flex items-center space-x-2 sm:space-x-3">
-                    <button onclick="toggleSugarDrawer(true)" class="group w-9 h-9 flex items-center justify-center transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Link to SugarRush">
-                        <img src="img/pace.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] rotate-180" alt="Link Nodes">
-                    </button>
-                </div>
-            </div>
-        </footer>
-    </main>
-
-    <div id="sugar-drawer" class="fixed inset-0 w-full h-screen flex flex-col justify-between select-none text-white font-mono z-40 transition-all duration-500 ease-in-out translate-x-full opacity-0 pointer-events-none overflow-hidden">
-        
-        <header class="w-full bg-gradient-to-b from-black/90 via-black/40 to-transparent backdrop-blur-md shrink-0 z-50">
-            <div class="p-4 sm:p-6 grid grid-cols-3 items-center max-w-7xl mx-auto uppercase tracking-widest font-mono text-[9px] text-white/40 min-h-[63px] sm:min-h-[69px] w-full">
-                <div class="justify-self-start flex items-center space-x-3">
-                    <button onclick="toggleSugarDrawer(false)" class="group w-9 h-9 flex items-center justify-center transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Close Vault">
-                        <img src="img/pace.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" alt="Close Vault">
-                    </button>
-                </div>
-                <div class="justify-self-center text-center tracking-[0.25em] font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-white">
-                    <span id="drawer-sugar-node">SUGARRUSH</span>
-                </div>
-                <div class="justify-self-end flex items-center space-x-3">
-                    <span class="font-bold tracking-[0.25em] text-white/50 hidden xs:inline-block"></span>
-                    <button onclick="toggleSugarDrawer(false)" class="group w-9 h-9 flex items-center justify-center transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Close Sugar Drawer">
-                        <img src="img/pace.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" alt="Close Sugar">
-                    </button>
-                </div>
-            </div>
-        </header>
-
-        <div class="w-full flex-1 overflow-y-auto scrollbar-none flex flex-col items-center py-4 px-4 text-center z-20">
+        <div class="w-full flex-1 overflow-y-auto scrollbar-none flex flex-col items-center py-4 px-4 text-center z-20 justify-between">
             
             <div class="relative w-full max-w-[180px] xs:max-w-[220px] sm:max-w-[280px] md:max-w-[320px] aspect-[13/15] transition-all duration-700 ease-out select-none cursor-pointer hover:-translate-y-1 hover:scale-[1.01] drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)] group mt-auto">
                 <div class="w-full h-full relative overflow-hidden opacity-90 transition-all duration-500 group-hover:opacity-100">
@@ -205,36 +102,129 @@
                 </div>
             </div>
             
-            <div id="sugar-variants-container" class="mt-4 mb-3 flex flex-nowrap items-center justify-center gap-1.5 sm:gap-3.5 text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.22em] font-mono select-none z-30 px-1 w-full overflow-x-visible shrink-0">
+            <div class="w-full flex flex-col items-center gap-4 mt-6 mb-auto px-4 shrink-0">
+                <p id="sugar-description" class="font-mono uppercase text-[9px] text-white/40 max-w-xl tracking-widest leading-relaxed min-h-[28px] transition-opacity duration-300">
+                    Chocolate amargo al 70% infusionado con destellos dorados comestibles.
+                </p>
+
+                <div id="sugar-variants-container" class="flex flex-nowrap items-center justify-center gap-2 text-[9px] tracking-widest font-mono select-none w-full overflow-x-visible">
                 </div>
-            
-            <p id="sugar-description" class="font-mono lowercase text-[8px] sm:text-[8px] text-white/70 max-w-xl tracking-normal font-light mb-3 min-h-[24px] transition-opacity duration-300 px-4 leading-normal shrink-0">
-                Chocolate amargo al 70% infusionado con destellos dorados comestibles.
-            </p>
-            
-            <div class="mb-4 flex flex-col items-center justify-center font-mono text-[8px] tracking-widest text-white/50 space-y-1 shrink-0">
-                <span id="sugar-spec">250 GRS // DELI-SIZE</span>
-                <span id="sugar-price" class="text-white font-bold text-[12px] text-pink-400">$35.000 COP</span>
-            </div>
-            
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md relative z-30 px-6 mb-auto shrink-0">
-                <button onclick="adquirirNodoSugar()" class="w-full sm:w-auto px-10 py-3 bg-[#1e0a21]/80 backdrop-blur-md text-white font-black text-[12px] tracking-[0.22em] uppercase rounded-md border border-pink-500/30 hover:border-pink-500 hover:bg-[#1a0022] transition-all duration-300 shadow-[0_0_20px_rgba(236,72,153,0.05)] hover:shadow-[0_0_25px_rgba(236,72,153,0.25)]">
-                    GET INFO
-                </button>
+
+                <div class="flex items-center justify-center gap-4 font-mono text-[9px] tracking-widest text-white/40 uppercase">
+                    <span id="sugar-spec">250 GRS // DELI-SIZE</span>
+                    <span class="text-white/20">|</span>
+                    <span id="sugar-price">35.000 COP</span>
+                </div>
+
+                <div class="w-full max-w-md pt-2">
+                    <button onclick="adquirirNodoSugar()" class="w-full sm:w-auto px-12 py-3 bg-[#1a0c1e]/80 backdrop-blur-md text-white font-black text-[12px] tracking-[0.22em] uppercase rounded-md border border-pink-500/30 hover:border-pink-500 hover:bg-[#1a0022] transition-all duration-300 shadow-[0_0_20px_rgba(236,72,153,0.05)] hover:shadow-[0_0_25px_rgba(236,72,153,0.25)]">
+                        GET INFO
+                    </button>
+                </div>
             </div>
         </div>
 
         <footer class="w-full bg-gradient-to-t from-black/90 via-black/40 to-transparent backdrop-blur-md shrink-0 z-50">
             <div class="p-4 sm:p-6 grid grid-cols-3 items-center max-w-7xl mx-auto uppercase tracking-widest font-mono text-[9px] text-white/40 min-h-[63px] sm:min-h-[69px] w-full">
-                <div class="justify-self-start flex items-center space-x-2 sm:space-x-3 text-left">
+                <div class="justify-self-start flex items-center">
+                    <button onclick="toggleSugarDrawer(true)" class="group w-9 h-9 flex items-center justify-center transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Next">
+                        <img src="img/back.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" alt="Back">
+                    </button>
+                </div>    
+                <div id="sugar-items-menu" class="justify-self-center flex items-center justify-center space-x-4 sm:space-x-6 text-center">
+                </div>
+                <div class="justify-self-end flex items-center">
+                    <button onclick="toggleSugarDrawer(true)" class="group w-9 h-9 flex items-center justify-center transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Link to BioRush">
+                        <img src="img/pace.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] rotate-180" alt="Link Nodes">
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <div id="sugar-drawer" class="fixed inset-0 w-full h-screen flex flex-col justify-between select-none text-white font-mono z-40 transition-all duration-500 ease-in-out translate-x-full opacity-0 pointer-events-none overflow-hidden">
+        
+        <header class="w-full bg-gradient-to-b from-black/90 via-black/40 to-transparent backdrop-blur-md shrink-0 z-50">
+            <div class="p-4 sm:p-6 grid grid-cols-3 items-center max-w-7xl mx-auto uppercase tracking-widest font-mono text-[9px] text-white/40 min-h-[63px] sm:min-h-[69px] w-full">
+                <div class="justify-self-start flex items-center">
+                    <button onclick="toggleSugarDrawer(false)" class="group w-9 h-9 flex items-center justify-center transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Close Vault">
+                        <img src="img/pace.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" alt="Close Vault">
+                    </button>
+                </div>
+                <div class="justify-self-center text-center tracking-[0.25em] font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-white">
+                    <span id="drawer-vault-node">BIORUSH</span>
+                </div>
+                <div class="justify-self-end flex items-center">
+                    <button onclick="toggleSugarDrawer(false)" class="group w-9 h-9 flex items-center justify-center transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Close Bio Drawer">
+                        <img src="img/pace.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" alt="Close Bio">
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="w-full flex-1 overflow-y-auto scrollbar-none flex flex-col items-center py-4 px-4 text-center z-20 justify-between">
+            
+            <div class="relative w-full max-w-[180px] xs:max-w-[220px] sm:max-w-[280px] md:max-w-[320px] aspect-[13/15] transition-all duration-700 ease-out select-none cursor-pointer hover:-translate-y-1 hover:scale-[1.01] drop-shadow-[0_20px_30px_rgba(0,0,0,0.7)] group mt-auto">
+                <div class="w-full h-full relative overflow-hidden opacity-90 transition-all duration-500 group-hover:opacity-100">
+                    <img id="biorush-pack-img" src="img/biorush.png" alt="BioRush Pack" class="img-glow-transition absolute inset-0 w-full h-full object-contain scale-[1.1] sm:scale-[1.2] pointer-events-none z-0 group-hover:scale-[1.15] sm:group-hover:scale-[1.25]" />
+                    <div class="absolute inset-0 flex items-center justify-center p-[2%] sm:p-[4%] z-10">
+                        <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-white/40 stroke-[1.5] transition-all duration-500 group-hover:stroke-white/60">
+                            <defs>
+                                <path id="textPath-top" d="M 105,200 A 95,95 0 0,1 295,200" />
+                                <path id="textPath-bottom" d="M 105,200 A 95,95 0 0,0 295,200" />
+                            </defs>
+                            <text class="fill-white font-black text-[9px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] uppercase transition-all duration-500">
+                                <textPath id="laser-variant-title" href="#textPath-top" startOffset="50%" text-anchor="middle">
+                                    BIORUSH MENTAL FOCUS
+                                </textPath>
+                            </text>
+                            <g class="opacity-30 stroke-[1.2] origin-center transform scale-75">
+                                <path d="M 110,120 L 290,120 L 110,280 L 290,280 Z" />
+                                <path d="M 110,120 Q 200,150 290,120" />
+                                <path d="M 110,280 Q 200,250 290,280" stroke-dasharray="2 2" />
+                            </g>
+                            <text class="fill-white/60 font-black text-[8px] sm:text-[9px] tracking-[0.25em] uppercase transition-all duration-500 group-hover:fill-white/90">
+                                <textPath href="#textPath-bottom" startOffset="50%" text-anchor="middle">
+                                    BIORUSH.WORLD &bull; 3243770474
+                                </textPath>
+                            </text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="w-full flex flex-col items-center gap-4 mt-6 mb-auto px-4 shrink-0">
+                <p id="biorush-description" class="font-mono uppercase text-[9px] text-white/40 max-w-xl tracking-widest leading-relaxed min-h-[28px] transition-opacity duration-300">
+                    Nootrópico de alta optimización cerebral para estados de flujo prolongados.
+                </p>
+
+                <div id="biorush-variants-container" class="flex flex-nowrap items-center justify-center gap-2 text-[9px] tracking-widest font-mono select-none w-full overflow-x-visible">
+                </div>
+
+                <div class="flex items-center justify-center gap-4 font-mono text-[9px] tracking-widest text-white/40 uppercase">
+                    <span id="biorush-spec">45 CAPS // 500 MGRS</span>
+                    <span class="text-white/20">|</span>
+                    <span id="biorush-price">70.000 COP</span>
+                </div>
+
+                <div class="w-full max-w-md pt-2">
+                    <button onclick="adquirirNodo()" class="w-full sm:w-auto px-12 py-3 bg-[#141414]/80 backdrop-blur-md text-white font-black text-[12px] tracking-[0.22em] uppercase rounded-md border border-white/20 hover:border-white/70 hover:bg-[#141414] transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_25px_rgba(255,255,255,0.25)]">
+                        GET INFO
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="w-full bg-gradient-to-t from-black/90 via-black/40 to-transparent backdrop-blur-md shrink-0 z-50">
+            <div class="p-4 sm:p-6 grid grid-cols-3 items-center max-w-7xl mx-auto uppercase tracking-widest font-mono text-[9px] text-white/40 min-h-[63px] sm:min-h-[69px] w-full">
+                <div class="justify-self-start flex items-center">
                     <button onclick="toggleSugarDrawer(false)" class="group w-9 h-9 flex items-center justify-center transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Back to Main">
                         <img src="img/pace.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" alt="Back">
                     </button>
-                    <div id="sugar-items-menu" class="flex items-center space-x-2 sm:space-x-3 pl-2 sm:pl-3 border-l border-white/10">
-                        </div>
                 </div>    
-                <div class="justify-self-center text-center tracking-[0.25em] font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-white/50"></div>
-                <div class="justify-self-end flex items-center space-x-2 sm:space-x-3">
+                <div id="biorush-items-menu" class="justify-self-center flex items-center justify-center space-x-4 sm:space-x-6 text-center">
+                </div>
+                <div class="justify-self-end flex items-center">
                     <button onclick="toggleSugarDrawer(false)" class="group w-9 h-9 flex items-center justify-center transition-all duration-300 focus:outline-none cursor-pointer" aria-label="Return">
                         <img src="img/pace.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" alt="Return">
                     </button>
@@ -245,50 +235,27 @@
 
 <script>
     const BIORUSH_DATABASE = {
-        'BIORUSH': {
-            'FOCUS': { desc: 'Nootrópico de alta optimización cerebral para estados de flujo prolongados.', label: 'BIORUSH MENTAL FOCUS', img: 'img/biorush.png', spec: '45 CAPS // 500 MGRS', price: '$70.000 COP', id: 'BR-01-FOC' },
-            'ZEN': { desc: 'Modulador de ondas alfa para reducción de estrés y claridad mental absoluta.', label: 'BIORUSH MENTAL ZEN', img: 'img/biorush_zen.png', spec: '45 CAPS // 500 MGRS', price: '$75.000 COP', id: 'BR-01-ZEN' },
-            'STAMINA': { desc: 'Potenciador de rendimiento físico y optimización de ATP mitocondrial.', label: 'BIORUSH BODY STAMINA', img: 'img/biorush_stamina.png', spec: '45 CAPS // 600 MGRS', price: '$70.000 COP', id: 'BR-01-STA' },
-            'CORE': { desc: 'Soporte cellular base y balance adaptógeno de amplio espectro.', label: 'BIORUSH BODY CORE', img: 'img/biorush_core.png', spec: '60 CAPS // 500 MGRS', price: '$65.000 COP', id: 'BR-01-COR' }
-        },
-        'ITEM2': {
-            'RAW': { desc: 'Electrólitos puros e hidratación isotónica sin añadidos ni endulzantes.', label: 'HYDRUSH ISOTONIC RAW', img: 'img/item2_raw.png', spec: '500 ML // HYDRATE', price: '$45.000 COP', id: 'BR-02-RAW' },
-            'INFUSED': { desc: 'Hidratación avanzada con extractos botánicos termogénicos activos.', label: 'HYDRUSH THERMO INFUSED', img: 'img/item2_infused.png', spec: '500 ML // HYDRATE', price: '$52.000 COP', id: 'BR-02-INF' }
-        },
-        'ITEM3': {
-            'CALM': { desc: 'Relajante neuromuscular diseñado para recuperación post-entrenamiento.', label: 'ADAPTOGENS DEEP CALM', img: 'img/item3_calm.png', spec: '60 CAPS // 400 MGRS', price: '$85.000 COP', id: 'BR-03-CLM' },
-            'REST': { desc: 'Inductor de sueño profundo y optimización del ciclo circadiano.', label: 'ADAPTOGENS NIGHT REST', img: 'img/item3_rest.png', spec: '30 CAPS // 500 MGRS', price: '$90.000 COP', id: 'BR-03-RST' }
-        },
-        'ITEM4': {
-            'BURN': { desc: 'Acelerador metabólico y oxidación lipídica en entornos de ayuno.', label: 'METABOLIC LIPID BURN', img: 'img/item4_burn.png', spec: '90 TABS // 300 MGRS', price: '$95.000 COP', id: 'BR-04-BRN' },
-            'SWEAT': { desc: 'Termogénico de alta sudoración para entrenamientos de alta intensidad.', label: 'METABOLIC HIGH SWEAT', img: 'img/item4_sweat.png', spec: '90 TABS // 300 MGRS', price: '$95.000 COP', id: 'BR-04-SWT' }
-        },
-        'ITEM5': {
-            'RENEW': { desc: 'Complejo antioxidante contra el envejecimiento prematuro celular.', label: 'CELLULAR AGING RENEW', img: 'img/item5_renew.png', spec: '300 MGRS // ESSENTIAL', price: '$110.000 COP', id: 'BR-05-RNW' }
-        }
+        'BIORUSH': { desc: 'Nootrópico de alta optimización cerebral para estados de flujo prolongados.', label: 'BIORUSH MENTAL FOCUS', img: 'img/biorush.png', spec: '45 CAPS // 500 MGRS', price: '70.000 COP', id: 'BR-01-FOC' },
+        'ZEN': { desc: 'Modulador de ondas alfa para reducción de estrés y claridad mental absoluta.', label: 'BIORUSH MENTAL ZEN', img: 'img/biorush_zen.png', spec: '45 CAPS // 500 MGRS', price: '75.000 COP', id: 'BR-01-ZEN' },
+        'STAMINA': { desc: 'Potenciador de rendimiento físico y optimización de ATP mitocondrial.', label: 'BIORUSH BODY STAMINA', img: 'img/biorush_stamina.png', spec: '45 CAPS // 600 MGRS', price: '70.000 COP', id: 'BR-01-STA' },
+        'CORE': { desc: 'Soporte cellular base y balance adaptógeno de amplio espectro.', label: 'BIORUSH BODY CORE', img: 'img/biorush_core.png', spec: '60 CAPS // 500 MGRS', price: '65.000 COP', id: 'BR-01-COR' },
+        'ITEM2': { desc: 'Electrólitos puros e hidratación isotónica sin añadidos ni endulzantes.', label: 'HYDRUSH ISOTONIC RAW', img: 'img/item2_raw.png', spec: '500 ML // HYDRATE', price: '45.000 COP', id: 'BR-02-RAW' },
+        'ITEM3': { desc: 'Relajante neuromuscular diseñado para recuperación post-entrenamiento.', label: 'ADAPTOGENS DEEP CALM', img: 'img/item3_calm.png', spec: '60 CAPS // 400 MGRS', price: '85.000 COP', id: 'BR-03-CLM' },
+        'ITEM4': { desc: 'Acelerador metabólico y oxidación lipídica en entornos de ayuno.', label: 'METABOLIC LIPID BURN', img: 'img/item4_burn.png', spec: '90 TABS // 300 MGRS', price: '95.000 COP', id: 'BR-04-BRN' },
+        'ITEM5': { desc: 'Complejo antioxidante contra el envejecimiento prematuro celular.', label: 'CELLULAR AGING RENEW', img: 'img/item5_renew.png', spec: '300 MGRS // ESSENTIAL', price: '110.000 COP', id: 'BR-05-RNW' }
     };
 
     const SUGARRUSH_DATABASE = {
-        'SUGARRUSH': {
-            'CHOCO': { desc: 'Chocolate amargo al 70% infusionado con destellos dorados comestibles.', label: 'SUGARRUSH CHOCO GLOW', img: 'img/sugar_choco.png', spec: '250 GRS // DELI-SIZE', price: '$35.000 COP', id: 'SR-01-CHO' },
-            'VANILLA': { desc: 'Crema de vainilla de Papantla texturizada con base crocante futurista.', label: 'SUGARRUSH VANILLA SKY', img: 'img/sugar_vanilla.png', spec: '250 GRS // DELI-SIZE', price: '$32.000 COP', id: 'SR-01-VAN' },
-            'BERRY': { desc: 'Coulis de frutos del bosque ácidos con esferificaciones de gelatina.', label: 'SUGARRUSH SWEET BERRY', img: 'img/sugar_berry.png', spec: '230 GRS // DELI-SIZE', price: '$38.000 COP', id: 'SR-01-BER' },
-            'CARAMEL': { desc: 'Toffee salado fluido con cristales de sal marina a baja temperatura.', label: 'SUGARRUSH GOLD CARAMEL', img: 'img/sugar_caramel.png', spec: '260 GRS // DELI-SIZE', price: '$36.000 COP', id: 'SR-01-CAR' }
-        },
-        'POSTRE2': {
-            'PISTACHIO': { desc: 'Gelato cremoso de pistacho puro de Sicilia emulsionado con nitrógeno.', label: 'ICE-LAB REAL PISTACHIO', img: 'img/postre2_pistachio.png', spec: '180 ML // ICE-LAB', price: '$22.000 COP', id: 'SR-02-PST' },
-            'AMORETTI': { desc: 'Base de almendras tostadas con destilado artesanal dulce de la casa.', label: 'ICE-LAB SWEET AMORETTI', img: 'img/postre2_amoretti.png', spec: '180 ML // ICE-LAB', price: '$25.000 COP', id: 'SR-02-AMO' }
-        },
-        'POSTRE3': {
-            'CITRIC': { desc: 'Macarons crujientes rellenos de ganache cítrico hiper-concentrado.', label: 'MACARONS HYPER CITRIC', img: 'img/postre3_citric.png', spec: '6 CAPS // MINI-BOX', price: '$28.000 COP', id: 'SR-03-CTR' },
-            'MATCHA': { desc: 'Macarons ceremoniales balanceados con perfiles herbales intensos.', label: 'MACARONS ZEN MATCHA', img: 'img/postre3_matcha.png', spec: '6 CAPS // MINI-BOX', price: '$30.000 COP', id: 'SR-03-MTC' }
-        }
+        'SUGARRUSH': { desc: 'Chocolate amargo al 70% infusionado con destellos dorados comestibles.', label: 'SUGARRUSH CHOCO GLOW', img: 'img/sugar_choco.png', spec: '250 GRS // DELI-SIZE', price: '35.000 COP', id: 'SR-01-CHO' },
+        'VANILLA': { desc: 'Crema de vainilla de Papantla texturizada con base crocante futurista.', label: 'SUGARRUSH VANILLA SKY', img: 'img/sugar_vanilla.png', spec: '250 GRS // DELI-SIZE', price: '32.000 COP', id: 'SR-01-VAN' },
+        'BERRY': { desc: 'Coulis de frutos del bosque ácidos con esferificaciones de gelatina.', label: 'SUGARRUSH SWEET BERRY', img: 'img/sugar_berry.png', spec: '230 GRS // DELI-SIZE', price: '38.000 COP', id: 'SR-01-BER' },
+        'CARAMEL': { desc: 'Toffee salado fluido con cristales de sal marina a baja temperatura.', label: 'SUGARRUSH GOLD CARAMEL', img: 'img/sugar_caramel.png', spec: '260 GRS // DELI-SIZE', price: '36.000 COP', id: 'SR-01-CAR' },
+        'POSTRE2': { desc: 'Gelato cremoso de pistacho puro de Sicilia emulsionado con nitrógeno.', label: 'ICE-LAB REAL PISTACHIO', img: 'img/postre2_pistachio.png', spec: '180 ML // ICE-LAB', price: '22.000 COP', id: 'SR-02-PST' },
+        'POSTRE3': { desc: 'Macarons crujientes rellenos de ganache cítrico hiper-concentrado.', label: 'MACARONS HYPER CITRIC', img: 'img/postre3_citric.png', spec: '6 CAPS // MINI-BOX', price: '28.000 COP', id: 'SR-03-CTR' }
     };
 
-    let activeBioItem = 'BIORUSH';
-    let activeBioVariant = 'FOCUS';
-    let activeSugarItem = 'SUGARRUSH';
-    let activeSugarVariant = 'CHOCO';
+    let activeBioVariant = 'BIORUSH';
+    let activeSugarVariant = 'SUGARRUSH';
     const numeroCelular = "573243770474";
 
     function inicializarBioRush() {
@@ -302,23 +269,14 @@
     }
 
     function cambiarBioItem(itemKey) {
-        activeBioItem = itemKey;
-        activeBioVariant = Object.keys(BIORUSH_DATABASE[itemKey])[0];
+        activeBioVariant = itemKey;
         actualizarBioUI();
         if (navigator.vibrate) navigator.vibrate(12);
     }
 
-    function seleccionarBioVariante(variantKey) {
-        activeBioVariant = variantKey;
-        actualizarBioUI();
-        if (navigator.vibrate) navigator.vibrate(6);
-    }
-
     function actualizarBioUI() {
-        const itemData = BIORUSH_DATABASE[activeBioItem];
-        const config = itemData[activeBioVariant];
-
-        document.getElementById('drawer-vault-node').textContent = activeBioItem;
+        const config = BIORUSH_DATABASE[activeBioVariant];
+        document.getElementById('drawer-vault-node').textContent = activeBioVariant;
 
         const descEl = document.getElementById('biorush-description');
         const packImg = document.getElementById('biorush-pack-img');
@@ -340,31 +298,34 @@
         Object.keys(BIORUSH_DATABASE).forEach(item => {
             const el = document.getElementById(`menu-bio-${item}`);
             if (el) {
-                el.className = (item === activeBioItem) 
+                el.className = (item === activeBioVariant) 
                     ? "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold text-white scale-105 border-b border-emerald-400 pb-0.5" 
                     : "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none text-white/40 hover:text-white/80";
             }
         });
 
+        // Renderizado de botones de subvariantes estéticas en el contenedor central
         const variantContainer = document.getElementById('biorush-variants-container');
-        const activeClass = "cursor-pointer transition-all duration-300 px-2.5 py-1.5 bg-[#141414]/80 backdrop-blur-md rounded-sm text-white border border-white/40 shadow-[0_0_12px_rgba(255,255,255,0.1)] font-black scale-105";
-        const inactiveClass = "cursor-pointer transition-all duration-300 px-2.5 py-1.5 bg-black/40 backdrop-blur-md rounded-sm text-white/40 border border-white/5 hover:border-white/30 hover:text-white/80";
-
-        variantContainer.innerHTML = Object.keys(itemData).map(v => `
-            <span onclick="seleccionarBioVariante('${v}')" class="${v === activeBioVariant ? activeClass : inactiveClass}">
-                ${v}
-            </span>
-        `).join('');
+        const subOptions = ['FOCUS', 'ZEN', 'STAMINA', 'CORE'];
+        
+        variantContainer.innerHTML = subOptions.map(opt => {
+            const isSelected = (activeBioVariant === opt || (opt === 'FOCUS' && activeBioVariant === 'BIORUSH'));
+            return `
+                <span onclick="if(BIORUSH_DATABASE['${opt === 'FOCUS'?'BIORUSH':opt}']) cambiarBioItem('${opt === 'FOCUS'?'BIORUSH':opt}')" 
+                      class="cursor-pointer transition-all duration-300 px-3 py-1 bg-black/40 backdrop-blur-md rounded-sm border ${isSelected ? 'border-white text-white font-black shadow-[0_0_12px_rgba(255,255,255,0.1)]' : 'border-white/5 text-white/40 hover:border-white/20 hover:text-white/80'}">
+                    ${opt}
+                </span>
+            `;
+        }).join('');
     }
 
     function adquirirNodo() {
-        const config = BIORUSH_DATABASE[activeBioItem][activeBioVariant];
+        const config = BIORUSH_DATABASE[activeBioVariant];
         const mensaje = `⚡ *NUEVA ORDEN - BIORUSH* ⚡\n\n` +
-                        `• *Nodo Base:* ${activeBioItem}\n` +
                         `• *Variante:* ${activeBioVariant}\n` +
                         `• *Especificación:* ${config.spec}\n` +
                         `• *Ref Label:* ${config.label}\n` +
-                        `• *Precio:* ${config.price}\n` +
+                        `• *Precio:* $${config.price}\n` +
                         `• *ID Seguridad:* \`${config.id}\`\n\n` +
                         `Solicito la inicialización y el despacho inmediato de esta orden.`;
 
@@ -384,23 +345,14 @@
     }
 
     function cambiarSugarItem(itemKey) {
-        activeSugarItem = itemKey;
-        activeSugarVariant = Object.keys(SUGARRUSH_DATABASE[itemKey])[0];
+        activeSugarVariant = itemKey;
         actualizarSugarUI();
         if (navigator.vibrate) navigator.vibrate(12);
     }
 
-    function seleccionarSugarVariante(variantKey) {
-        activeSugarVariant = variantKey;
-        actualizarSugarUI();
-        if (navigator.vibrate) navigator.vibrate(6);
-    }
-
     function actualizarSugarUI() {
-        const itemData = SUGARRUSH_DATABASE[activeSugarItem];
-        const config = itemData[activeSugarVariant];
-
-        document.getElementById('drawer-sugar-node').textContent = activeSugarItem === 'SUGARRUSH' ? 'POSTRE1' : activeSugarItem;
+        const config = SUGARRUSH_DATABASE[activeSugarVariant];
+        document.getElementById('drawer-sugar-node').textContent = activeSugarVariant === 'SUGARRUSH' ? 'POSTRE1' : activeSugarVariant;
 
         const descEl = document.getElementById('sugar-description');
         const packImg = document.getElementById('sugar-pack-img');
@@ -422,31 +374,35 @@
         Object.keys(SUGARRUSH_DATABASE).forEach(item => {
             const el = document.getElementById(`menu-sugar-${item}`);
             if (el) {
-                el.className = (item === activeSugarItem) 
+                el.className = (item === activeSugarVariant) 
                     ? "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold text-white scale-105 border-b border-pink-500 pb-0.5" 
                     : "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none text-white/30 hover:text-white/70";
             }
         });
 
+        // Renderizado de botones de subvariantes estéticas en el contenedor central
         const variantContainer = document.getElementById('sugar-variants-container');
-        const activeClass = "cursor-pointer transition-all duration-300 px-2.5 py-1.5 bg-[#1a0c1e]/80 backdrop-blur-md rounded-sm text-white border border-pink-500/50 shadow-[0_0_12px_rgba(236,72,153,0.15)] font-black scale-105";
-        const inactiveClass = "cursor-pointer transition-all duration-300 px-2.5 py-1.5 bg-black/40 backdrop-blur-md rounded-sm text-white/40 border border-white/5 hover:border-pink-500/30 hover:text-white/80";
-
-        variantContainer.innerHTML = Object.keys(itemData).map(v => `
-            <span onclick="seleccionarSugarVariante('${v}')" class="${v === activeSugarVariant ? activeClass : inactiveClass}">
-                ${v}
-            </span>
-        `).join('');
+        const subOptions = ['CHOCO', 'VANILLA', 'BERRY', 'CARAMEL'];
+        
+        variantContainer.innerHTML = subOptions.map(opt => {
+            const dbKey = opt === 'CHOCO' ? 'SUGARRUSH' : opt;
+            const isSelected = (activeSugarVariant === dbKey);
+            return `
+                <span onclick="if(SUGARRUSH_DATABASE['${dbKey}']) cambiarSugarItem('${dbKey}')" 
+                      class="cursor-pointer transition-all duration-300 px-3 py-1 bg-black/40 backdrop-blur-md rounded-sm border ${isSelected ? 'border-pink-500 text-white font-black shadow-[0_0_12px_rgba(236,72,153,0.15)]' : 'border-white/5 text-white/40 hover:border-pink-500/30 hover:text-white/80'}">
+                    ${opt}
+                </span>
+            `;
+        }).join('');
     }
 
     function adquirirNodoSugar() {
-        const config = SUGARRUSH_DATABASE[activeSugarItem][activeSugarVariant];
+        const config = SUGARRUSH_DATABASE[activeSugarVariant];
         const mensaje = `🧁 *NUEVA ORDEN - SUGARRUSH* 🧁\n\n` +
                         `• *Línea:* Dulce / Postres\n` +
-                        `• *Sección:* ${activeSugarItem}\n` +
-                        `• *Variante Electiva:* ${activeSugarVariant}\n` +
+                        `• *Sección:* ${activeSugarVariant}\n` +
                         `• *Volumen:* ${config.spec}\n` +
-                        `• *Precio:* ${config.price}\n` +
+                        `• *Precio:* $${config.price}\n` +
                         `• *ID Seguridad:* \`${config.id}\`\n\n` +
                         `Solicito información de despacho para esta orden molecular.`;
 
