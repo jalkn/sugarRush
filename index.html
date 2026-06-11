@@ -264,48 +264,136 @@
     </div>
 
 <script>
-    // ==========================================
-    // 1. CONFIGURACIÓN DE CATÁLOGOS EXTENDIDOS
+// ==========================================
+    // 1. CONFIGURACIÓN DE CATÁLOGOS EXTENDIDOS (BIORUSH - ADAPTOGENS)
     // ==========================================
     const BIORUSH_CATALOG = {
         'BIORUSH': {
             defaultVariant: 'FOCUS',
             variants: {
-                'FOCUS': { desc: 'Nootrópico de alta optimización cerebral para estados de flujo prolongados.', label: 'BIORUSH MENTAL FOCUS', img: 'img/caps.png', imgBack: 'img/back.png', spec: '45 CAPS // 500 MGRS', price: '70.000 COP', id: 'BR-01-FOC' },
-                'ZEN': { desc: 'Modulador de ondas alfa para reducción de estrés y claridad mental absoluta.', label: 'BIORUSH MENTAL ZEN', img: 'img/biorush_zen.png', imgBack: 'img/biorush_zen_back.png', spec: '45 CAPS // 500 MGRS', price: '75.000 COP', id: 'BR-01-ZEN' },
-                'STAMINA': { desc: 'Potenciador de rendimiento físico y optimización de ATP mitocondrial.', label: 'BIORUSH BODY STAMINA', img: 'img/biorush_stamina.png', imgBack: 'img/biorush_stamina_back.png', spec: '45 CAPS // 600 MGRS', price: '70.000 COP', id: 'BR-01-STA' },
-                'CORE': { desc: 'Soporte cellular base y balance adaptógeno de amplio espectro.', label: 'BIORUSH BODY CORE', img: 'img/biorush_core.png', imgBack: 'img/biorush_core_back.png', spec: '60 CAPS // 500 MGRS', price: '65.000 COP', id: 'BR-01-COR' }
+                'FOCUS': { 
+                    desc: 'Functional oat milk pudding infused with Lion’s Mane. High-performance brain optimization for prolonged flow states.', 
+                    label: 'BIORUSH LION’S MANE FOCUS', 
+                    img: 'img/biorush.png', 
+                    imgBack: 'img/back.png', 
+                    spec: 'OAT MILK PUDDING // LION’S MANE', 
+                    price: '70.000 COP', 
+                    id: 'BR-01-FOC' 
+                },
+                'ZEN': { 
+                    desc: 'Functional oat milk pudding infused with Reishi. Alpha-wave modulator for stress reduction and absolute mental clarity.', 
+                    label: 'BIORUSH REISHI ZEN', 
+                    img: 'img/biorush.png', 
+                    imgBack: 'img/biorush_zen_back.png', 
+                    spec: 'OAT MILK PUDDING // REISHI', 
+                    price: '75.000 COP', 
+                    id: 'BR-01-ZEN' 
+                },
+                'STAMINA': { 
+                    desc: 'Functional oat milk pudding infused with Cordyceps. Physical performance enhancer and mitochondrial ATP optimization.', 
+                    label: 'BIORUSH CORDYCEPS STAMINA', 
+                    img: 'img/biorush.png', 
+                    imgBack: 'img/biorush_stamina_back.png', 
+                    spec: 'OAT MILK PUDDING // CORDYCEPS', 
+                    price: '70.000 COP', 
+                    id: 'BR-01-STA' 
+                },
+                'CORE': { 
+                    desc: 'Functional oat milk pudding infused with Turkey Tail. Core cellular support and broad-spectrum adaptogenic balance.', 
+                    label: 'BIORUSH TURKEY TAIL CORE', 
+                    img: 'img/biorush.png', 
+                    imgBack: 'img/biorush_core_back.png', 
+                    spec: 'OAT MILK PUDDING // TURKEY TAIL', 
+                    price: '65.000 COP', 
+                    id: 'BR-01-COR' 
+                }
             }
         },
-        'ITEM2': {
-            defaultVariant: 'RAW',
+        'CAPS_45': {
+            defaultVariant: 'FOCUS',
             variants: {
-                'RAW': { desc: 'Electrólitos puros e hidratación isotónica sin añadidos ni endulzantes.', label: 'HYDRUSH ISOTONIC RAW', img: 'img/item2_raw.png', imgBack: 'img/item2_raw_back.png', spec: '500 ML // HYDRATE', price: '45.000 COP', id: 'BR-02-RAW' },
-                'BOOST': { desc: 'Fórmula hidratante avanzada adicionada con aminoácidos ramificados.', label: 'HYDRUSH ISOTONIC BOOST', img: 'img/item2_boost.png', imgBack: 'img/item2_boost_back.png', spec: '500 ML // HYDRATE', price: '48.000 COP', id: 'BR-02-BST' }
+                'FOCUS': { 
+                    desc: 'Premium adaptogenic capsules. Advanced Lion’s Mane extract for deep cognitive performance and neuroprotection.', 
+                    label: 'CAPS 45 LION’S MANE FOCUS', 
+                    img: 'img/item2_raw.png', 
+                    imgBack: 'img/item2_raw_back.png', 
+                    spec: '45 CAPS // 500 MG', 
+                    price: '85.000 COP', 
+                    id: 'BR-02-FOC' 
+                },
+                'ZEN': { 
+                    desc: 'Premium adaptogenic capsules. Pure Reishi extract tailored for nervous system regulation and restful recovery.', 
+                    label: 'CAPS 45 REISHI ZEN', 
+                    img: 'img/item2_boost.png', 
+                    imgBack: 'img/item2_boost_back.png', 
+                    spec: '45 CAPS // 500 MG', 
+                    price: '89.000 COP', 
+                    id: 'BR-02-ZEN' 
+                },
+                'STAMINA': { 
+                    desc: 'Premium adaptogenic capsules. High-potency Cordyceps extract engineered for cellular oxygenation and clean energy output.', 
+                    label: 'CAPS 45 CORDYCEPS STAMINA', 
+                    img: 'img/item2_stamina.png', 
+                    imgBack: 'img/item2_stamina_back.png', 
+                    spec: '45 CAPS // 500 MG', 
+                    price: '85.000 COP', 
+                    id: 'BR-02-STA' 
+                },
+                'CORE': { 
+                    desc: 'Premium adaptogenic capsules. Concentrated Turkey Tail extract for comprehensive gut health and immune defense.', 
+                    label: 'CAPS 45 TURKEY TAIL CORE', 
+                    img: 'img/item2_core.png', 
+                    imgBack: 'img/item2_core_back.png', 
+                    spec: '45 CAPS // 500 MG', 
+                    price: '80.000 COP', 
+                    id: 'BR-02-COR' 
+                }
             }
         },
-        'ITEM3': {
-            defaultVariant: 'CALM',
+        'CAPS_24': {
+            defaultVariant: 'FOCUS',
             variants: {
-                'CALM': { desc: 'Relajante neuromuscular diseñado para recuperación post-entrenamiento.', label: 'ADAPTOGENS DEEP CALM', img: 'img/item3_calm.png', imgBack: 'img/item3_calm_back.png', spec: '60 CAPS // 400 MGRS', price: '85.000 COP', id: 'BR-03-CLM' },
-                'SLEEP': { desc: 'Inductor del sueño profundo optimizado con precursores de melatonina y magnesio.', label: 'ADAPTOGENS NIGHT REST', img: 'img/item3_sleep.png', imgBack: 'img/item3_sleep_back.png', spec: '60 CAPS // 450 MGRS', price: '89.000 COP', id: 'BR-03-SLP' }
-            }
-        },
-        'ITEM4': {
-            defaultVariant: 'BURN',
-            variants: {
-                'BURN': { desc: 'Acelerador metabólico y oxidación lipídica en entornos de ayuno.', label: 'METABOLIC LIPID BURN', img: 'img/item4_burn.png', imgBack: 'img/item4_burn_back.png', spec: '90 TABS // 300 MGRS', price: '95.000 COP', id: 'BR-04-BRN' },
-                'THERMO': { desc: 'Complejo termogénico de liberación prolongada para entrenamientos de alta intensidad.', label: 'METABOLIC THERMO SHOCK', img: 'img/item4_thermo.png', imgBack: 'img/item4_thermo_back.png', spec: '90 TABS // 350 MGRS', price: '98.000 COP', id: 'BR-04-TRM' }
-            }
-        },
-        'ITEM5': {
-            defaultVariant: 'RENEW',
-            variants: {
-                'RENEW': { desc: 'Complejo antioxidante contra el envejecimiento prematuro celular.', label: 'CELLULAR AGING RENEW', img: 'img/item5_renew.png', imgBack: 'img/item5_renew_back.png', spec: '300 MGRS // ESSENTIAL', price: '110.000 COP', id: 'BR-05-RNW' },
-                'SHIELD': { desc: 'Escudo biológico celular y protector mitocondrial contra radicales libres.', label: 'CELLULAR MITO SHIELD', img: 'img/item5_shield.png', imgBack: 'img/item5_shield_back.png', spec: '350 MGRS // ESSENTIAL', price: '115.000 COP', id: 'BR-05-SHD' }
+                'FOCUS': { 
+                    desc: 'Travel-size adaptogenic capsules. Concentrated Lion’s Mane for immediate mental clarity on-the-go.', 
+                    label: 'CAPS 24 LION’S MANE FOCUS', 
+                    img: 'img/item3_calm.png', 
+                    imgBack: 'img/item3_calm_back.png', 
+                    spec: '24 CAPS // 500 MG', 
+                    price: '48.000 COP', 
+                    id: 'BR-03-FOC' 
+                },
+                'ZEN': { 
+                    desc: 'Travel-size adaptogenic capsules. Fast-acting Reishi extract for immediate decompression and mental relief.', 
+                    label: 'CAPS 24 REISHI ZEN', 
+                    img: 'img/item3_sleep.png', 
+                    imgBack: 'img/item3_sleep_back.png', 
+                    spec: '24 CAPS // 500 MG', 
+                    price: '52.000 COP', 
+                    id: 'BR-03-ZEN' 
+                },
+                'STAMINA': { 
+                    desc: 'Travel-size adaptogenic capsules. Bioavailable Cordyceps to boost endurance and dynamic daily stamina.', 
+                    label: 'CAPS 24 CORDYCEPS STAMINA', 
+                    img: 'img/item3_stamina.png', 
+                    imgBack: 'img/item3_stamina_back.png', 
+                    spec: '24 CAPS // 500 MG', 
+                    price: '48.000 COP', 
+                    id: 'BR-03-STA' 
+                },
+                'CORE': { 
+                    desc: 'Travel-size adaptogenic capsules. Turkey Tail extract formulated to protect your biological shield and vitality.', 
+                    label: 'CAPS 24 TURKEY TAIL CORE', 
+                    img: 'img/item3_core.png', 
+                    imgBack: 'img/item3_core_back.png', 
+                    spec: '24 CAPS // 500 MG', 
+                    price: '45.000 COP', 
+                    id: 'BR-03-COR' 
+                }
             }
         }
     };
+
+
 
     const SUGARRUSH_CATALOG = {
         'POSTRE1': {
