@@ -81,7 +81,7 @@
                     <img id="sugar-pack-img" src="img/sugar_choco.png" alt="SugarRush Pack Front" class="img-glow-transition absolute inset-0 w-full h-full object-contain scale-[1.1] sm:scale-[1.2] pointer-events-none z-10" />
                     
                     <div class="absolute inset-0 flex items-center justify-center p-[2%] sm:p-[4%] z-20 pointer-events-none">
-                        <svg id="sugar-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-pink-500/40 stroke-[1.5] transition-all duration-500 pointer-events-none">
+                        <svg id="sugar-vector-target" viewBox="0 0 400 400" class="w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] fill-none stroke-pink-500/40 stroke-[1.5] transition-all duration-500 pointer-events-none">
                             <defs>
                                 <path id="sugarPath-top" d="M 105,200 A 95,95 0 0,1 295,200" />
                                 <path id="sugarPath-bottom" d="M 105,200 A 95,95 0 0,0 295,200" />
@@ -186,7 +186,7 @@
                     <img id="biorush-pack-img" src="img/caps.png" alt="BioRush Pack Front" class="img-glow-transition absolute inset-0 w-full h-full object-contain scale-[1.9] sm:scale-[1.8] pointer-events-none z-10" />
                     
                     <div class="absolute inset-0 flex items-center justify-center p-[2%] sm:p-[4%] z-20 pointer-events-none">
-                        <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-white/40 stroke-[1.5] transition-all duration-500 pointer-events-none">
+                        <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] fill-none stroke-white/40 stroke-[1.5] transition-all duration-500 pointer-events-none">
                             <defs>
                                 <path id="textPath-top" d="M 105,200 A 95,95 0 0,1 295,200" />
                                 <path id="textPath-bottom" d="M 105,200 A 95,95 0 0,0 295,200" />
@@ -342,16 +342,17 @@
     // ==========================================
     // 2. SISTEMA UNIFICADO DE REVELADO (POINTERS)
     // ==========================================
-    function vincularBotonRevelado(btnId, frontImgId, backImgId) {
+    // Actualizamos la función para recibir un cuarto parámetro: 'vectorId'
+    function vincularBotonRevelado(btnId, frontImgId, backImgId, vectorId) {
         const btn = document.getElementById(btnId);
         const frontImg = document.getElementById(frontImgId);
         const backImg = document.getElementById(backImgId);
+        const vectorSvg = document.getElementById(vectorId); // Captura el SVG correcto sin alterar su ID
 
         if (!btn || !frontImg || !backImg) return;
 
         const mostrarReverso = (e) => {
             e.preventDefault();
-            // Limpiamos estilos inline de opacidad temporales para priorizar las clases de Tailwind
             frontImg.style.opacity = '';
             backImg.style.opacity = '';
             
@@ -360,6 +361,11 @@
             
             backImg.classList.remove('opacity-0');
             backImg.classList.add('opacity-100', 'scale-[1.12]');
+            
+            // Desvanece el SVG (gracias a la clase transition-all duration-500 que ya tienen tus SVGs)
+            if (vectorSvg) {
+                vectorSvg.classList.add('opacity-0', 'pointer-events-none');
+            }
             
             if (navigator.vibrate) navigator.vibrate(10);
         };
@@ -370,12 +376,16 @@
             
             backImg.classList.remove('opacity-100', 'scale-[1.12]');
             backImg.classList.add('opacity-0');
+            
+            // Restaura el SVG a su estado visible original
+            if (vectorSvg) {
+                vectorSvg.classList.remove('opacity-0', 'pointer-events-none');
+            }
         };
 
         btn.addEventListener('pointerdown', mostrarReverso);
         btn.addEventListener('pointerup', ocultarReverso);
         btn.addEventListener('pointerleave', ocultarReverso);
-        
         btn.addEventListener('touchstart', mostrarReverso, { passive: false });
         btn.addEventListener('touchend', ocultarReverso);
     }
@@ -395,7 +405,10 @@
         
         vincularBotonRevelado('btn-reveal-bio', 'biorush-pack-img', 'biorush-pack-img-back');
         actualizarBioUI();
+
+        vincularBotonRevelado('btn-reveal-bio', 'biorush-pack-img', 'biorush-pack-img-back', 'laser-vector-target');actualizarBioUI();
     }
+    
 
     function cambiarBioItem(itemKey) {
         currentBioItem = itemKey;
@@ -497,6 +510,8 @@
         }
         
         vincularBotonRevelado('btn-reveal-sugar', 'sugar-pack-img', 'sugar-pack-img-back');
+        actualizarSugarUI();
+        vincularBotonRevelado('btn-reveal-sugar', 'sugar-pack-img', 'sugar-pack-img-back', 'sugar-vector-target');
         actualizarSugarUI();
     }
 
