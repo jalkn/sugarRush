@@ -37,8 +37,10 @@
         }
         #page-bg-overlay { background: radial-gradient(circle at 50% 50%, #4a0e4e 0%, #0f0212 100%); }
         #sugar-bg-overlay { background: radial-gradient(circle at 50% 50%, #035d3f 0%, #272625 100%); }
+        
+        /* Transiciones fluidas para revelado de empaque */
         .img-glow-transition {
-            transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             will-change: filter, transform, opacity;
         }
         .scrollbar-none::-webkit-scrollbar { display: none; }
@@ -51,7 +53,6 @@
     <div id="sugar-bg-overlay" class="opacity-0"></div>
     <div class="fixed inset-0 bg-gradient-to-b from-black via-transparent to-black z-0 pointer-events-none"></div>
 
-    <!-- MAIN VAULT: SECCIÓN SUGARRUSH (Catálogo de Postres) -->
     <main id="main-vault" class="w-full h-screen flex flex-col justify-between select-none text-white font-mono z-10 relative transition-all duration-500 ease-out overflow-hidden">
 
         <header class="w-full bg-gradient-to-b from-black/90 via-black/40 to-transparent backdrop-blur-md shrink-0 z-50">
@@ -74,12 +75,13 @@
 
         <div class="w-full flex-1 overflow-y-auto scrollbar-none flex flex-col items-center py-4 px-4 text-center z-20 justify-between">
             
-            <!-- Contenedor de Imagen Central SVG/PNG -->
-            <div class="relative w-full max-w-[180px] xs:max-w-[220px] sm:max-w-[280px] md:max-w-[320px] aspect-[13/15] transition-all duration-700 ease-out select-none cursor-pointer hover:-translate-y-1 hover:scale-[1.01] drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)] group mt-auto">
-                <div class="w-full h-full relative overflow-hidden opacity-90 transition-all duration-500 group-hover:opacity-100">
-                    <img id="sugar-pack-img" src="img/sugar_choco.png" alt="SugarRush Pack" class="img-glow-transition absolute inset-0 w-full h-full object-contain scale-[1.1] sm:scale-[1.2] pointer-events-none z-0 group-hover:scale-[1.15] sm:group-hover:scale-[1.25]" />
-                    <div class="absolute inset-0 flex items-center justify-center p-[2%] sm:p-[4%] z-10">
-                        <svg id="sugar-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-pink-500/40 stroke-[1.5] transition-all duration-500 group-hover:stroke-pink-400/70">
+            <div id="sugar-pack-container" class="relative w-full max-w-[180px] xs:max-w-[220px] sm:max-w-[280px] md:max-w-[320px] aspect-[13/15] transition-all duration-700 ease-out select-none drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)] mt-auto z-10">
+                <div class="w-full h-full relative overflow-hidden bg-transparent">
+                    <img id="sugar-pack-img-back" src="img/sugar_choco_back.png" alt="SugarRush Pack Back" class="img-glow-transition absolute inset-0 w-full h-full object-contain scale-[1.05] sm:scale-[1.15] opacity-0 pointer-events-none z-0" />
+                    <img id="sugar-pack-img" src="img/sugar_choco.png" alt="SugarRush Pack Front" class="img-glow-transition absolute inset-0 w-full h-full object-contain scale-[1.1] sm:scale-[1.2] pointer-events-none z-10" />
+                    
+                    <div class="absolute inset-0 flex items-center justify-center p-[2%] sm:p-[4%] z-20 pointer-events-none">
+                        <svg id="sugar-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-pink-500/40 stroke-[1.5] transition-all duration-500 pointer-events-none">
                             <defs>
                                 <path id="sugarPath-top" d="M 105,200 A 95,95 0 0,1 295,200" />
                                 <path id="sugarPath-bottom" d="M 105,200 A 95,95 0 0,0 295,200" />
@@ -94,7 +96,7 @@
                                 <path d="M 110,120 Q 200,150 290,120" />
                                 <path d="M 110,280 Q 200,250 290,280" stroke-dasharray="2 2" />
                             </g>
-                            <text class="fill-white/60 font-black text-[8px] sm:text-[9px] tracking-[0.25em] uppercase transition-all duration-500 group-hover:fill-pink-300">
+                            <text class="fill-white/60 font-black text-[8px] sm:text-[9px] tracking-[0.25em] uppercase transition-all duration-500">
                                 <textPath href="#sugarPath-bottom" startOffset="50%" text-anchor="middle">
                                     SUGARRUSH.DELI &bull; 3243770474
                                 </textPath>
@@ -105,16 +107,25 @@
             </div>
             
             <div class="w-full flex flex-col items-center gap-4 mt-6 mb-auto px-4 shrink-0">
-                <!-- Texto Descriptivo -->
+                
+                <!-- BOTÓN DE INTERACCIÓN AGREGADO AQUÍ (SugarRush) -->
+                <button id="btn-reveal-sugar" class="flex flex-col items-center gap-1 group focus:outline-none active:scale-95 transition-transform duration-200" aria-label="Revelar reverso">
+                    <span class="text-[8px] font-mono tracking-[0.3em] text-pink-500/60 group-hover:text-pink-400 transition-colors uppercase">Hold to inspect info</span>
+                    <div class="w-8 h-8 rounded-full border border-pink-500/30 flex items-center justify-center bg-pink-950/20 group-hover:border-pink-500 group-hover:bg-pink-500/10 transition-all duration-300 shadow-[0_0_10px_rgba(236,72,153,0.05)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-white/70 group-hover:text-pink-400 transition-colors">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                    </div>
+                </button>
+
                 <p id="sugar-description" class="font-mono uppercase text-[9px] text-white/40 max-w-xl tracking-widest leading-relaxed min-h-[28px] transition-opacity duration-300">
                     Chocolate amargo al 70% infusionado con destellos dorados comestibles.
                 </p>
 
-                <!-- Botonera Central Interactiva de Variantes -->
                 <div id="sugar-variants-container" class="flex flex-nowrap items-center justify-center gap-2 text-[9px] tracking-widest font-mono select-none w-full overflow-x-visible">
                 </div>
 
-                <!-- Info Técnica / Precio bajo la botonera -->
                 <div class="flex items-center justify-center gap-4 font-mono text-[9px] tracking-widest text-white/40 uppercase">
                     <span id="sugar-spec">250 GRS // DELI-SIZE</span>
                     <span class="text-white/20">|</span>
@@ -136,7 +147,6 @@
                         <img src="img/back.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" alt="Back">
                     </button>
                 </div>    
-                <!-- Menú de Ítems Base de SugarRush -->
                 <div id="sugar-items-menu" class="justify-self-center flex items-center justify-center space-x-4 sm:space-x-6 text-center">
                 </div>
                 <div class="justify-self-end flex items-center">
@@ -148,7 +158,6 @@
         </footer>
     </main>
 
-    <!-- DRAWER COPA: SECCIÓN BIORUSH (Catálogo de Nootrópicos/Suplementos) -->
     <div id="sugar-drawer" class="fixed inset-0 w-full h-screen flex flex-col justify-between select-none text-white font-mono z-40 transition-all duration-500 ease-in-out translate-x-full opacity-0 pointer-events-none overflow-hidden">
         
         <header class="w-full bg-gradient-to-b from-black/90 via-black/40 to-transparent backdrop-blur-md shrink-0 z-50">
@@ -171,11 +180,13 @@
 
         <div class="w-full flex-1 overflow-y-auto scrollbar-none flex flex-col items-center py-4 px-4 text-center z-20 justify-between">
             
-            <div class="relative w-full max-w-[180px] xs:max-w-[220px] sm:max-w-[280px] md:max-w-[320px] aspect-[13/15] transition-all duration-700 ease-out select-none cursor-pointer hover:-translate-y-1 hover:scale-[1.01] drop-shadow-[0_20px_30px_rgba(0,0,0,0.7)] group mt-auto">
-                <div class="w-full h-full relative overflow-hidden opacity-90 transition-all duration-500 group-hover:opacity-100">
-                    <img id="biorush-pack-img" src="img/biorush.png" alt="BioRush Pack" class="img-glow-transition absolute inset-0 w-full h-full object-contain scale-[1.1] sm:scale-[1.2] pointer-events-none z-0 group-hover:scale-[1.15] sm:group-hover:scale-[1.25]" />
-                    <div class="absolute inset-0 flex items-center justify-center p-[2%] sm:p-[4%] z-10">
-                        <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-white/40 stroke-[1.5] transition-all duration-500 group-hover:stroke-white/60">
+            <div id="biorush-pack-container" class="relative w-full max-w-[180px] xs:max-w-[220px] sm:max-w-[280px] md:max-w-[320px] aspect-[13/15] transition-all duration-700 ease-out select-none drop-shadow-[0_20px_30px_rgba(0,0,0,0.7)] mt-auto z-10">
+                <div class="w-full h-full relative overflow-hidden bg-transparent">
+                    <img id="biorush-pack-img-back" src="img/back.png" alt="BioRush Pack Back" class="img-glow-transition absolute inset-0 w-full h-full object-contain scale-[1.05] sm:scale-[1.15] opacity-0 pointer-events-none z-0" />
+                    <img id="biorush-pack-img" src="img/caps.png" alt="BioRush Pack Front" class="img-glow-transition absolute inset-0 w-full h-full object-contain scale-[1.1] sm:scale-[1.2] pointer-events-none z-10" />
+                    
+                    <div class="absolute inset-0 flex items-center justify-center p-[2%] sm:p-[4%] z-20 pointer-events-none">
+                        <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-white/40 stroke-[1.5] transition-all duration-500 pointer-events-none">
                             <defs>
                                 <path id="textPath-top" d="M 105,200 A 95,95 0 0,1 295,200" />
                                 <path id="textPath-bottom" d="M 105,200 A 95,95 0 0,0 295,200" />
@@ -190,7 +201,7 @@
                                 <path d="M 110,120 Q 200,150 290,120" />
                                 <path d="M 110,280 Q 200,250 290,280" stroke-dasharray="2 2" />
                             </g>
-                            <text class="fill-white/60 font-black text-[8px] sm:text-[9px] tracking-[0.25em] uppercase transition-all duration-500 group-hover:fill-white/90">
+                            <text class="fill-white/60 font-black text-[8px] sm:text-[9px] tracking-[0.25em] uppercase transition-all duration-500">
                                 <textPath href="#textPath-bottom" startOffset="50%" text-anchor="middle">
                                     BIORUSH.WORLD &bull; 3243770474
                                 </textPath>
@@ -201,11 +212,22 @@
             </div>
             
             <div class="w-full flex flex-col items-center gap-4 mt-6 mb-auto px-4 shrink-0">
+                
+                <!-- BOTÓN DE INTERACCIÓN AGREGADO AQUÍ (BioRush) -->
+                <button id="btn-reveal-bio" class="flex flex-col items-center gap-1 group focus:outline-none active:scale-95 transition-transform duration-200" aria-label="Revelar reverso">
+                    <span class="text-[8px] font-mono tracking-[0.3em] text-emerald-500/60 group-hover:text-emerald-400 transition-colors uppercase">Hold to inspect info</span>
+                    <div class="w-8 h-8 rounded-full border border-emerald-500/30 flex items-center justify-center bg-emerald-950/20 group-hover:border-emerald-400 group-hover:bg-emerald-500/10 transition-all duration-300 shadow-[0_0_10px_rgba(16,185,129,0.05)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-white/70 group-hover:text-emerald-400 transition-colors">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                    </div>
+                </button>
+
                 <p id="biorush-description" class="font-mono uppercase text-[9px] text-white/40 max-w-xl tracking-widest leading-relaxed min-h-[28px] transition-opacity duration-300">
                     Nootrópico de alta optimización cerebral para estados de flujo prolongados.
                 </p>
 
-                <!-- Botonera Central Interactiva de Variantes de BioRush -->
                 <div id="biorush-variants-container" class="flex flex-nowrap items-center justify-center gap-2 text-[9px] tracking-widest font-mono select-none w-full overflow-x-visible">
                 </div>
 
@@ -230,7 +252,6 @@
                         <img src="img/pace.png" class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 group-hover:scale-[1.05] transition-all duration-300 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" alt="Back">
                     </button>
                 </div>    
-                <!-- Menú de Ítems Base de BioRush -->
                 <div id="biorush-items-menu" class="justify-self-center flex items-center justify-center space-x-4 sm:space-x-6 text-center">
                 </div>
                 <div class="justify-self-end flex items-center">
@@ -243,43 +264,45 @@
     </div>
 
 <script>
-    // ESTRUCTURA CORREGIDA: Catálogos organizados por Ítems Base, cada uno conteniendo sus respectivas variantes estéticas
+    // ==========================================
+    // 1. CONFIGURACIÓN DE CATÁLOGOS EXTENDIDOS
+    // ==========================================
     const BIORUSH_CATALOG = {
         'BIORUSH': {
             defaultVariant: 'FOCUS',
             variants: {
-                'FOCUS': { desc: 'Nootrópico de alta optimización cerebral para estados de flujo prolongados.', label: 'BIORUSH MENTAL FOCUS', img: 'img/biorush.png', spec: '45 CAPS // 500 MGRS', price: '70.000 COP', id: 'BR-01-FOC' },
-                'ZEN': { desc: 'Modulador de ondas alfa para reducción de estrés y claridad mental absoluta.', label: 'BIORUSH MENTAL ZEN', img: 'img/biorush_zen.png', spec: '45 CAPS // 500 MGRS', price: '75.000 COP', id: 'BR-01-ZEN' },
-                'STAMINA': { desc: 'Potenciador de rendimiento físico y optimización de ATP mitocondrial.', label: 'BIORUSH BODY STAMINA', img: 'img/biorush_stamina.png', spec: '45 CAPS // 600 MGRS', price: '70.000 COP', id: 'BR-01-STA' },
-                'CORE': { desc: 'Soporte cellular base y balance adaptógeno de amplio espectro.', label: 'BIORUSH BODY CORE', img: 'img/biorush_core.png', spec: '60 CAPS // 500 MGRS', price: '65.000 COP', id: 'BR-01-COR' }
+                'FOCUS': { desc: 'Nootrópico de alta optimización cerebral para estados de flujo prolongados.', label: 'BIORUSH MENTAL FOCUS', img: 'img/caps.png', imgBack: 'img/back.png', spec: '45 CAPS // 500 MGRS', price: '70.000 COP', id: 'BR-01-FOC' },
+                'ZEN': { desc: 'Modulador de ondas alfa para reducción de estrés y claridad mental absoluta.', label: 'BIORUSH MENTAL ZEN', img: 'img/biorush_zen.png', imgBack: 'img/biorush_zen_back.png', spec: '45 CAPS // 500 MGRS', price: '75.000 COP', id: 'BR-01-ZEN' },
+                'STAMINA': { desc: 'Potenciador de rendimiento físico y optimización de ATP mitocondrial.', label: 'BIORUSH BODY STAMINA', img: 'img/biorush_stamina.png', imgBack: 'img/biorush_stamina_back.png', spec: '45 CAPS // 600 MGRS', price: '70.000 COP', id: 'BR-01-STA' },
+                'CORE': { desc: 'Soporte cellular base y balance adaptógeno de amplio espectro.', label: 'BIORUSH BODY CORE', img: 'img/biorush_core.png', imgBack: 'img/biorush_core_back.png', spec: '60 CAPS // 500 MGRS', price: '65.000 COP', id: 'BR-01-COR' }
             }
         },
         'ITEM2': {
             defaultVariant: 'RAW',
             variants: {
-                'RAW': { desc: 'Electrólitos puros e hidratación isotónica sin añadidos ni endulzantes.', label: 'HYDRUSH ISOTONIC RAW', img: 'img/item2_raw.png', spec: '500 ML // HYDRATE', price: '45.000 COP', id: 'BR-02-RAW' },
-                'BOOST': { desc: 'Fórmula hidratante avanzada adicionada con aminoácidos ramificados.', label: 'HYDRUSH ISOTONIC BOOST', img: 'img/item2_boost.png', spec: '500 ML // HYDRATE', price: '48.000 COP', id: 'BR-02-BST' }
+                'RAW': { desc: 'Electrólitos puros e hidratación isotónica sin añadidos ni endulzantes.', label: 'HYDRUSH ISOTONIC RAW', img: 'img/item2_raw.png', imgBack: 'img/item2_raw_back.png', spec: '500 ML // HYDRATE', price: '45.000 COP', id: 'BR-02-RAW' },
+                'BOOST': { desc: 'Fórmula hidratante avanzada adicionada con aminoácidos ramificados.', label: 'HYDRUSH ISOTONIC BOOST', img: 'img/item2_boost.png', imgBack: 'img/item2_boost_back.png', spec: '500 ML // HYDRATE', price: '48.000 COP', id: 'BR-02-BST' }
             }
         },
         'ITEM3': {
             defaultVariant: 'CALM',
             variants: {
-                'CALM': { desc: 'Relajante neuromuscular diseñado para recuperación post-entrenamiento.', label: 'ADAPTOGENS DEEP CALM', img: 'img/item3_calm.png', spec: '60 CAPS // 400 MGRS', price: '85.000 COP', id: 'BR-03-CLM' },
-                'SLEEP': { desc: 'Inductor del sueño profundo optimizado con precursores de melatonina y magnesio.', label: 'ADAPTOGENS NIGHT REST', img: 'img/item3_sleep.png', spec: '60 CAPS // 450 MGRS', price: '89.000 COP', id: 'BR-03-SLP' }
+                'CALM': { desc: 'Relajante neuromuscular diseñado para recuperación post-entrenamiento.', label: 'ADAPTOGENS DEEP CALM', img: 'img/item3_calm.png', imgBack: 'img/item3_calm_back.png', spec: '60 CAPS // 400 MGRS', price: '85.000 COP', id: 'BR-03-CLM' },
+                'SLEEP': { desc: 'Inductor del sueño profundo optimizado con precursores de melatonina y magnesio.', label: 'ADAPTOGENS NIGHT REST', img: 'img/item3_sleep.png', imgBack: 'img/item3_sleep_back.png', spec: '60 CAPS // 450 MGRS', price: '89.000 COP', id: 'BR-03-SLP' }
             }
         },
         'ITEM4': {
             defaultVariant: 'BURN',
             variants: {
-                'BURN': { desc: 'Acelerador metabólico y oxidación lipídica en entornos de ayuno.', label: 'METABOLIC LIPID BURN', img: 'img/item4_burn.png', spec: '90 TABS // 300 MGRS', price: '95.000 COP', id: 'BR-04-BRN' },
-                'THERMO': { desc: 'Complejo termogénico de liberación prolongada para entrenamientos de alta intensidad.', label: 'METABOLIC THERMO SHOCK', img: 'img/item4_thermo.png', spec: '90 TABS // 350 MGRS', price: '98.000 COP', id: 'BR-04-TRM' }
+                'BURN': { desc: 'Acelerador metabólico y oxidación lipídica en entornos de ayuno.', label: 'METABOLIC LIPID BURN', img: 'img/item4_burn.png', imgBack: 'img/item4_burn_back.png', spec: '90 TABS // 300 MGRS', price: '95.000 COP', id: 'BR-04-BRN' },
+                'THERMO': { desc: 'Complejo termogénico de liberación prolongada para entrenamientos de alta intensidad.', label: 'METABOLIC THERMO SHOCK', img: 'img/item4_thermo.png', imgBack: 'img/item4_thermo_back.png', spec: '90 TABS // 350 MGRS', price: '98.000 COP', id: 'BR-04-TRM' }
             }
         },
         'ITEM5': {
             defaultVariant: 'RENEW',
             variants: {
-                'RENEW': { desc: 'Complejo antioxidante contra el envejecimiento prematuro celular.', label: 'CELLULAR AGING RENEW', img: 'img/item5_renew.png', spec: '300 MGRS // ESSENTIAL', price: '110.000 COP', id: 'BR-05-RNW' },
-                'SHIELD': { desc: 'Escudo biológico celular y protector mitocondrial contra radicales libres.', label: 'CELLULAR MITO SHIELD', img: 'img/item5_shield.png', spec: '350 MGRS // ESSENTIAL', price: '115.000 COP', id: 'BR-05-SHD' }
+                'RENEW': { desc: 'Complejo antioxidante contra el envejecimiento prematuro celular.', label: 'CELLULAR AGING RENEW', img: 'img/item5_renew.png', imgBack: 'img/item5_renew_back.png', spec: '300 MGRS // ESSENTIAL', price: '110.000 COP', id: 'BR-05-RNW' },
+                'SHIELD': { desc: 'Escudo biológico celular y protector mitocondrial contra radicales libres.', label: 'CELLULAR MITO SHIELD', img: 'img/item5_shield.png', imgBack: 'img/item5_shield_back.png', spec: '350 MGRS // ESSENTIAL', price: '115.000 COP', id: 'BR-05-SHD' }
             }
         }
     };
@@ -288,51 +311,95 @@
         'POSTRE1': {
             defaultVariant: 'CHOCO',
             variants: {
-                'CHOCO': { desc: 'Chocolate amargo al 70% infusionado con destellos dorados comestibles.', label: 'SUGARRUSH CHOCO GLOW', img: 'img/sugar_choco.png', spec: '250 GRS // DELI-SIZE', price: '35.000 COP', id: 'SR-01-CHO' },
-                'VANILLA': { desc: 'Crema de vainilla de Papantla texturizada con base crocante futurista.', label: 'SUGARRUSH VANILLA SKY', img: 'img/sugar_vanilla.png', spec: '250 GRS // DELI-SIZE', price: '32.000 COP', id: 'SR-01-VAN' },
-                'BERRY': { desc: 'Coulis de frutos del bosque ácidos con esferificaciones de gelatina.', label: 'SUGARRUSH SWEET BERRY', img: 'img/sugar_berry.png', spec: '230 GRS // DELI-SIZE', price: '38.000 COP', id: 'SR-01-BER' },
-                'CARAMEL': { desc: 'Toffee salado fluido con cristales de sal marina a baja temperatura.', label: 'SUGARRUSH GOLD CARAMEL', img: 'img/sugar_caramel.png', spec: '260 GRS // DELI-SIZE', price: '36.000 COP', id: 'SR-01-CAR' }
+                'CHOCO': { desc: 'Chocolate amargo al 70% infusionado con destellos dorados comestibles.', label: 'SUGARRUSH CHOCO GLOW', img: 'img/sugar_choco.png', imgBack: 'img/sugar_choco_back.png', spec: '250 GRS // DELI-SIZE', price: '35.000 COP', id: 'SR-01-CHO' },
+                'VANILLA': { desc: 'Crema de vainilla de Papantla texturizada con base crocante futurista.', label: 'SUGARRUSH VANILLA SKY', img: 'img/sugar_vanilla.png', imgBack: 'img/sugar_vanilla_back.png', spec: '250 GRS // DELI-SIZE', price: '32.000 COP', id: 'SR-01-VAN' },
+                'BERRY': { desc: 'Coulis de frutos del bosque ácidos con esferificaciones de gelatina.', label: 'SUGARRUSH SWEET BERRY', img: 'img/sugar_berry.png', imgBack: 'img/sugar_berry_back.png', spec: '230 GRS // DELI-SIZE', price: '38.000 COP', id: 'SR-01-BER' },
+                'CARAMEL': { desc: 'Toffee salado fluido con cristales de sal marina a baja temperatura.', label: 'SUGARRUSH GOLD CARAMEL', img: 'img/sugar_caramel.png', imgBack: 'img/sugar_caramel_back.png', spec: '260 GRS // DELI-SIZE', price: '36.000 COP', id: 'SR-01-CAR' }
             }
         },
         'POSTRE2': {
             defaultVariant: 'PISTACHIO',
             variants: {
-                'PISTACHIO': { desc: 'Gelato cremoso de pistacho puro de Sicilia emulsionado con nitrógeno.', label: 'ICE-LAB REAL PISTACHIO', img: 'img/postre2_pistachio.png', spec: '180 ML // ICE-LAB', price: '22.000 COP', id: 'SR-02-PST' },
-                'AMORETTI': { desc: 'Base de almendras tostadas con destilado artesanal dulce de la casa.', label: 'ICE-LAB SWEET AMORETTI', img: 'img/postre2_amoretti.png', spec: '180 ML // ICE-LAB', price: '25.000 COP', id: 'SR-02-AMO' }
+                'PISTACHIO': { desc: 'Gelato cremoso de pistacho puro de Sicilia emulsionado con nitrógeno.', label: 'ICE-LAB REAL PISTACHIO', img: 'img/postre2_pistachio.png', imgBack: 'img/postre2_pistachio_back.png', spec: '180 ML // ICE-LAB', price: '22.000 COP', id: 'SR-02-PST' },
+                'AMORETTI': { desc: 'Base de almendras tostadas con destilado artesanal dulce de la casa.', label: 'ICE-LAB SWEET AMORETTI', img: 'img/postre2_amoretti.png', imgBack: 'img/postre2_amoretti_back.png', spec: '180 ML // ICE-LAB', price: '25.000 COP', id: 'SR-02-AMO' }
             }
         },
         'POSTRE3': {
             defaultVariant: 'CITRIC',
             variants: {
-                'CITRIC': { desc: 'Macarons crujientes rellenos de ganache cítrico hiper-concentrado.', label: 'MACARONS HYPER CITRIC', img: 'img/postre3_citric.png', spec: '6 CAPS // MINI-BOX', price: '28.000 COP', id: 'SR-03-CTR' },
-                'MATCHA': { desc: 'Macarons ceremoniales balanceados con perfiles herbales intensos.', label: 'MACARONS ZEN MATCHA', img: 'img/postre3_matcha.png', spec: '6 CAPS // MINI-BOX', price: '30.000 COP', id: 'SR-03-MTC' }
+                'CITRIC': { desc: 'Macarons crujientes rellenos de ganache cítrico hiper-concentrado.', label: 'MACARONS HYPER CITRIC', img: 'img/postre3_citric.png', imgBack: 'img/postre3_citric_back.png', spec: '6 CAPS // MINI-BOX', price: '28.000 COP', id: 'SR-03-CTR' },
+                'MATCHA': { desc: 'Macarons ceremoniales balanceados con perfiles herbales intensos.', label: 'MACARONS ZEN MATCHA', img: 'img/postre3_matcha.png', imgBack: 'img/postre3_matcha_back.png', spec: '6 CAPS // MINI-BOX', price: '30.000 COP', id: 'SR-03-MTC' }
             }
         }
     };
 
-    // Estado inicial de navegación
     let currentBioItem = 'BIORUSH';
     let currentBioVariant = 'FOCUS';
-
     let currentSugarItem = 'POSTRE1';
     let currentSugarVariant = 'CHOCO';
-
     const numeroCelular = "573243770474";
 
-    // --- LÓGICA BIORUSH ---
+    // ==========================================
+    // 2. SISTEMA UNIFICADO DE REVELADO (POINTERS)
+    // ==========================================
+    function vincularBotonRevelado(btnId, frontImgId, backImgId) {
+        const btn = document.getElementById(btnId);
+        const frontImg = document.getElementById(frontImgId);
+        const backImg = document.getElementById(backImgId);
+
+        if (!btn || !frontImg || !backImg) return;
+
+        const mostrarReverso = (e) => {
+            e.preventDefault();
+            // Limpiamos estilos inline de opacidad temporales para priorizar las clases de Tailwind
+            frontImg.style.opacity = '';
+            backImg.style.opacity = '';
+            
+            frontImg.classList.remove('opacity-100');
+            frontImg.classList.add('opacity-0', 'scale-[1.02]');
+            
+            backImg.classList.remove('opacity-0');
+            backImg.classList.add('opacity-100', 'scale-[1.12]');
+            
+            if (navigator.vibrate) navigator.vibrate(10);
+        };
+
+        const ocultarReverso = () => {
+            frontImg.classList.remove('opacity-0', 'scale-[1.02]');
+            frontImg.classList.add('opacity-100');
+            
+            backImg.classList.remove('opacity-100', 'scale-[1.12]');
+            backImg.classList.add('opacity-0');
+        };
+
+        btn.addEventListener('pointerdown', mostrarReverso);
+        btn.addEventListener('pointerup', ocultarReverso);
+        btn.addEventListener('pointerleave', ocultarReverso);
+        
+        btn.addEventListener('touchstart', mostrarReverso, { passive: false });
+        btn.addEventListener('touchend', ocultarReverso);
+    }
+
+    // ==========================================
+    // 3. LÓGICA DE INTERFAZ BIORUSH
+    // ==========================================
     function inicializarBioRush() {
         const menuContainer = document.getElementById('biorush-items-menu');
-        menuContainer.innerHTML = Object.keys(BIORUSH_CATALOG).map(item => `
-            <span id="menu-bio-${item}" onclick="cambiarBioItem('${item}')" class="cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold">
-                ${item}
-            </span>
-        `).join('');
+        if (menuContainer) {
+            menuContainer.innerHTML = Object.keys(BIORUSH_CATALOG).map(item => `
+                <span id="menu-bio-${item}" onclick="cambiarBioItem('${item}')" class="cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold">
+                    ${item}
+                </span>
+            `).join('');
+        }
+        
+        vincularBotonRevelado('btn-reveal-bio', 'biorush-pack-img', 'biorush-pack-img-back');
         actualizarBioUI();
     }
 
     function cambiarBioItem(itemKey) {
         currentBioItem = itemKey;
-        currentBioVariant = BIORUSH_CATALOG[itemKey].defaultVariant; // Carga la variante por defecto del ítem
+        currentBioVariant = BIORUSH_CATALOG[itemKey].defaultVariant;
         actualizarBioUI();
         if (navigator.vibrate) navigator.vibrate(12);
     }
@@ -347,26 +414,36 @@
         const itemConfig = BIORUSH_CATALOG[currentBioItem];
         const variantConfig = itemConfig.variants[currentBioVariant];
         
-        document.getElementById('drawer-vault-node').textContent = currentBioItem;
+        const drawerNode = document.getElementById('drawer-vault-node');
+        if (drawerNode) drawerNode.textContent = currentBioItem;
 
         const descEl = document.getElementById('biorush-description');
         const packImg = document.getElementById('biorush-pack-img');
+        const packImgBack = document.getElementById('biorush-pack-img-back');
         
-        descEl.style.opacity = 0;
-        packImg.style.opacity = 0;
+        if (descEl && packImg && packImgBack) {
+            descEl.style.opacity = 0;
+            packImg.style.opacity = 0;
+            packImgBack.style.opacity = 0;
 
-        setTimeout(() => {
-            descEl.textContent = variantConfig.desc;
-            packImg.src = variantConfig.img;
-            document.getElementById('laser-variant-title').textContent = variantConfig.label;
-            document.getElementById('biorush-spec').textContent = variantConfig.spec;
-            document.getElementById('biorush-price').textContent = variantConfig.price;
-            
-            descEl.style.opacity = 1;
-            packImg.style.opacity = 1;
-        }, 150);
+            setTimeout(() => {
+                descEl.textContent = variantConfig.desc;
+                packImg.src = variantConfig.img;
+                packImgBack.src = variantConfig.imgBack;
+                
+                const labelTitle = document.getElementById('laser-variant-title');
+                const specEl = document.getElementById('biorush-spec');
+                const priceEl = document.getElementById('biorush-price');
+                
+                if (labelTitle) labelTitle.textContent = variantConfig.label;
+                if (specEl) specEl.textContent = variantConfig.spec;
+                if (priceEl) priceEl.textContent = variantConfig.price;
+                
+                descEl.style.opacity = 1;
+                packImg.style.opacity = 1;
+            }, 150);
+        }
 
-        // Resaltar ítem activo en el menú inferior
         Object.keys(BIORUSH_CATALOG).forEach(item => {
             const el = document.getElementById(`menu-bio-${item}`);
             if (el) {
@@ -376,17 +453,18 @@
             }
         });
 
-        // Renderizar dinámicamente sus variantes en la botonera central (entre 2 y 4 opciones)
         const variantContainer = document.getElementById('biorush-variants-container');
-        variantContainer.innerHTML = Object.keys(itemConfig.variants).map(vKey => {
-            const isSelected = (vKey === currentBioVariant);
-            return `
-                <span onclick="cambiarBioVariant('${vKey}')" 
-                      class="cursor-pointer transition-all duration-300 px-3 py-1 bg-black/40 backdrop-blur-md rounded-sm border ${isSelected ? 'border-white text-white font-black shadow-[0_0_12px_rgba(255,255,255,0.1)]' : 'border-white/5 text-white/40 hover:border-white/20 hover:text-white/80'}">
-                    ${vKey}
-                </span>
-            `;
-        }).join('');
+        if (variantContainer) {
+            variantContainer.innerHTML = Object.keys(itemConfig.variants).map(vKey => {
+                const isSelected = (vKey === currentBioVariant);
+                return `
+                    <span onclick="cambiarBioVariant('${vKey}')" 
+                          class="cursor-pointer transition-all duration-300 px-3 py-1 bg-black/40 backdrop-blur-md rounded-sm border ${isSelected ? 'border-white text-white font-black shadow-[0_0_12px_rgba(255,255,255,0.1)]' : 'border-white/5 text-white/40 hover:border-white/20 hover:text-white/80'}">
+                        ${vKey}
+                    </span>
+                `;
+            }).join('');
+        }
     }
 
     function adquirirNodo() {
@@ -405,21 +483,26 @@
         window.open(urlWhatsapp, '_blank');
     }
 
-
-    // --- LÓGICA SUGARRUSH ---
+    // ==========================================
+    // 4. LÓGICA DE INTERFAZ SUGARRUSH
+    // ==========================================
     function inicializarSugarRush() {
         const menuContainer = document.getElementById('sugar-items-menu');
-        menuContainer.innerHTML = Object.keys(SUGARRUSH_CATALOG).map(item => `
-            <span id="menu-sugar-${item}" onclick="cambiarSugarItem('${item}')" class="cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold">
-                ${item}
-            </span>
-        `).join('');
+        if (menuContainer) {
+            menuContainer.innerHTML = Object.keys(SUGARRUSH_CATALOG).map(item => `
+                <span id="menu-sugar-${item}" onclick="cambiarSugarItem('${item}')" class="cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold">
+                    ${item}
+                </span>
+            `).join('');
+        }
+        
+        vincularBotonRevelado('btn-reveal-sugar', 'sugar-pack-img', 'sugar-pack-img-back');
         actualizarSugarUI();
     }
 
     function cambiarSugarItem(itemKey) {
         currentSugarItem = itemKey;
-        currentSugarVariant = SUGARRUSH_CATALOG[itemKey].defaultVariant; // Carga la variante por defecto del postre
+        currentSugarVariant = SUGARRUSH_CATALOG[itemKey].defaultVariant;
         actualizarSugarUI();
         if (navigator.vibrate) navigator.vibrate(12);
     }
@@ -434,26 +517,36 @@
         const itemConfig = SUGARRUSH_CATALOG[currentSugarItem];
         const variantConfig = itemConfig.variants[currentSugarVariant];
         
-        document.getElementById('drawer-sugar-node').textContent = currentSugarItem;
+        const drawerSugarNode = document.getElementById('drawer-sugar-node');
+        if (drawerSugarNode) drawerSugarNode.textContent = currentSugarItem;
 
         const descEl = document.getElementById('sugar-description');
         const packImg = document.getElementById('sugar-pack-img');
+        const packImgBack = document.getElementById('sugar-pack-img-back');
         
-        descEl.style.opacity = 0;
-        packImg.style.opacity = 0;
+        if (descEl && packImg && packImgBack) {
+            descEl.style.opacity = 0;
+            packImg.style.opacity = 0;
+            packImgBack.style.opacity = 0;
 
-        setTimeout(() => {
-            descEl.textContent = variantConfig.desc;
-            packImg.src = variantConfig.img;
-            document.getElementById('sugar-variant-title').textContent = variantConfig.label;
-            document.getElementById('sugar-spec').textContent = variantConfig.spec;
-            document.getElementById('sugar-price').textContent = variantConfig.price;
-            
-            descEl.style.opacity = 1;
-            packImg.style.opacity = 1;
-        }, 150);
+            setTimeout(() => {
+                descEl.textContent = variantConfig.desc;
+                packImg.src = variantConfig.img;
+                packImgBack.src = variantConfig.imgBack;
+                
+                const sugarLabel = document.getElementById('sugar-variant-title');
+                const sugarSpec = document.getElementById('sugar-spec');
+                const sugarPrice = document.getElementById('sugar-price');
+                
+                if (sugarLabel) sugarLabel.textContent = variantConfig.label;
+                if (sugarSpec) sugarSpec.textContent = variantConfig.spec;
+                if (sugarPrice) sugarPrice.textContent = variantConfig.price;
+                
+                descEl.style.opacity = 1;
+                packImg.style.opacity = 1;
+            }, 150);
+        }
 
-        // Resaltar ítem activo en el menú inferior
         Object.keys(SUGARRUSH_CATALOG).forEach(item => {
             const el = document.getElementById(`menu-sugar-${item}`);
             if (el) {
@@ -463,17 +556,18 @@
             }
         });
 
-        // Renderizar dinámicamente sus variantes en la botonera central (entre 2 y 4 opciones por postre)
         const variantContainer = document.getElementById('sugar-variants-container');
-        variantContainer.innerHTML = Object.keys(itemConfig.variants).map(vKey => {
-            const isSelected = (vKey === currentSugarVariant);
-            return `
-                <span onclick="cambiarSugarVariant('${vKey}')" 
-                      class="cursor-pointer transition-all duration-300 px-3 py-1 bg-black/40 backdrop-blur-md rounded-sm border ${isSelected ? 'border-pink-500 text-white font-black shadow-[0_0_12px_rgba(236,72,153,0.15)]' : 'border-white/5 text-white/40 hover:border-pink-500/30 hover:text-white/80'}">
-                    ${vKey}
-                </span>
-            `;
-        }).join('');
+        if (variantContainer) {
+            variantContainer.innerHTML = Object.keys(itemConfig.variants).map(vKey => {
+                const isSelected = (vKey === currentSugarVariant);
+                return `
+                    <span onclick="cambiarSugarVariant('${vKey}')" 
+                          class="cursor-pointer transition-all duration-300 px-3 py-1 bg-black/40 backdrop-blur-md rounded-sm border ${isSelected ? 'border-pink-500 text-white font-black shadow-[0_0_12px_rgba(236,72,153,0.15)]' : 'border-white/5 text-white/40 hover:border-pink-500/30 hover:text-white/80'}">
+                        ${vKey}
+                    </span>
+                `;
+            }).join('');
+        }
     }
 
     function adquirirNodoSugar() {
@@ -492,31 +586,40 @@
         window.open(urlWhatsapp, '_blank');
     }
 
-    // Intercambio de vistas laterales (Drawer)
+    // ==========================================
+    // 5. CONTROL DEL PANEL LATERAL (DRAWER)
+    // ==========================================
     function toggleSugarDrawer(open) {
         const sugarDrawer = document.getElementById('sugar-drawer');
         const mainVault = document.getElementById('main-vault');
         const bioBg = document.getElementById('page-bg-overlay');
         const sugarBg = document.getElementById('sugar-bg-overlay');
 
+        if (!sugarDrawer || !mainVault) return;
+
         if (open) {
             sugarDrawer.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
             sugarDrawer.classList.add('translate-x-0', 'opacity-100');
             mainVault.classList.add('opacity-0', 'pointer-events-none');
-            bioBg.classList.add('opacity-0');
-            sugarBg.classList.remove('opacity-0');
-            sugarBg.classList.add('opacity-100');
+            if (bioBg) bioBg.classList.add('opacity-0');
+            if (sugarBg) {
+                sugarBg.classList.remove('opacity-0', 'pointer-events-none');
+                sugarBg.classList.add('opacity-100');
+            }
         } else {
             sugarDrawer.classList.remove('translate-x-0', 'opacity-100');
             sugarDrawer.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
             mainVault.classList.remove('opacity-0', 'pointer-events-none');
-            sugarBg.classList.remove('opacity-100');
-            sugarBg.classList.add('opacity-0');
-            bioBg.classList.remove('opacity-0');
+            if (sugarBg) {
+                sugarBg.classList.remove('opacity-100');
+                sugarBg.classList.add('opacity-0', 'pointer-events-none');
+            }
+            if (bioBg) bioBg.classList.remove('opacity-0');
         }
         if (navigator.vibrate) navigator.vibrate(15);
     }
 
+    // Inicialización al cargar la carga del DOM
     document.addEventListener('DOMContentLoaded', () => {
         inicializarBioRush();
         inicializarSugarRush();
