@@ -88,7 +88,7 @@
                             </defs>
                             <text class="fill-white font-black text-[9px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] uppercase transition-all duration-500">
                                 <textPath id="sugar-variant-title" href="#sugarPath-top" startOffset="50%" text-anchor="middle">
-                                    SUGARRUSH CHOCO GLOW
+                                    SUGARRUSH ALFAJOR
                                 </textPath>
                             </text>
                             <g class="opacity-30 stroke-[1.2] origin-center transform scale-75 stroke-pink-500">
@@ -128,7 +128,7 @@
                 <div class="flex items-center justify-center gap-4 font-mono text-[9px] tracking-widest text-white/40 uppercase">
                     <span id="sugar-spec">250 GRS // DELI-SIZE</span>
                     <span class="text-white/20">|</span>
-                    <span id="sugar-price">35.000 COP</span>
+                    <span id="sugar-price">$35.000</span>
                 </div>
 
                 <div class="w-full max-w-md pt-2">
@@ -232,7 +232,7 @@
                 <div class="flex items-center justify-center gap-4 font-mono text-[9px] tracking-widest text-white/40 uppercase">
                     <span id="biorush-spec">45 CAPS // 500 MGRS</span>
                     <span class="text-white/20">|</span>
-                    <span id="biorush-price">70.000 COP</span>
+                    <span id="biorush-price">$70.000</span>
                 </div>
 
                 <div class="w-full max-w-md pt-2">
@@ -262,47 +262,47 @@
     </div>
 
 <script>
-// ==========================================
-    // 1. CONFIGURACIÓN DE CATÁLOGOS EXTENDIDOS (BIORUSH - ADAPTOGENS)
-    // ==========================================
+// =========================================================================
+    // 1. CONFIGURACIÓN DE CATÁLOGOS EXTENDIDOS: LÍNEA BIORUSH (ADAPTÓGENOS)
+    // =========================================================================
     const BIORUSH_CATALOG = {
         'BIORUSH': {
             defaultVariant: 'FOCUS',
             variants: {
                 'FOCUS': { 
-                    desc: 'Functional oat milk pudding infused with Lion’s Mane. High-performance brain optimization for prolonged flow states.', 
-                    label: 'BIORUSH LION’S MANE FOCUS', 
+                    desc: 'Enfoque y claridad cognitiva.', 
+                    label: 'BIORUSH METAL FOCUS', 
                     img: 'img/biorush.png', 
                     imgBack: 'img/back.png', 
-                    spec: 'PUDDING // LION’S MANE', 
-                    price: '70.000 COP', 
+                    spec: 'FLAN DE AVENA // LION’S MANE', 
+                    price: '$8.000', 
                     id: 'BR-01-FOC' 
                 },
                 'ZEN': { 
-                    desc: 'Functional oat milk pudding infused with Reishi. Alpha-wave modulator for stress reduction and absolute mental clarity.', 
-                    label: 'BIORUSH REISHI ZEN', 
+                    desc: 'Reducción del ruido mental.', 
+                    label: 'BIORUSH MENTAL ZEN', 
                     img: 'img/biorush.png', 
                     imgBack: 'img/biorush_zen_back.png', 
-                    spec: 'PUDDING // REISHI', 
-                    price: '75.000 COP', 
+                    spec: 'FLAN DE AVENA // REISHI', 
+                    price: '$8.000', 
                     id: 'BR-01-ZEN' 
                 },
                 'STAMINA': { 
-                    desc: 'Functional oat milk pudding infused with Cordyceps. Physical performance enhancer and mitochondrial ATP optimization.', 
-                    label: 'BIORUSH CORDYCEPS STAMINA', 
+                    desc: 'Optimización del rendimiento energético celular.', 
+                    label: 'BIORUSH BODY STAMINA', 
                     img: 'img/biorush.png', 
                     imgBack: 'img/biorush_stamina_back.png', 
-                    spec: 'PUDDING // CORDYCEPS', 
-                    price: '70.000 COP', 
+                    spec: 'FLAN DE AVENA // CORDYCEPS', 
+                    price: '$8.000', 
                     id: 'BR-01-STA' 
                 },
                 'CORE': { 
-                    desc: 'Functional oat milk pudding infused with Turkey Tail. Core cellular support and broad-spectrum adaptogenic balance.', 
-                    label: 'BIORUSH TURKEY TAIL CORE', 
+                    desc: 'Sincronización inmunológica integral.', 
+                    label: 'BIORUSH BODY CORE', 
                     img: 'img/biorush.png', 
                     imgBack: 'img/biorush_core_back.png', 
-                    spec: 'PUDDING // TURKEY TAIL', 
-                    price: '65.000 COP', 
+                    spec: 'FLAN DE AVENA // TURKEY TAIL', 
+                    price: '$8.000', 
                     id: 'BR-01-COR' 
                 }
             }
@@ -311,39 +311,39 @@
             defaultVariant: 'FOCUS',
             variants: {
                 'FOCUS': { 
-                    desc: 'Premium adaptogenic capsules. Advanced Lion’s Mane extract for deep cognitive performance and neuroprotection.', 
-                    label: 'CAPS 45 LION’S MANE FOCUS', 
-                    img: 'img/item2_raw.png', 
+                    desc: 'Enfoque y claridad cognitiva.', 
+                    label: 'CAPS 45 MENTAL FOCUS', 
+                    img: 'img/caps.png', 
                     imgBack: 'img/item2_raw_back.png', 
                     spec: '45 CAPS // 500 MG', 
-                    price: '85.000 COP', 
+                    price: '85.000', 
                     id: 'BR-02-FOC' 
                 },
                 'ZEN': { 
-                    desc: 'Premium adaptogenic capsules. Pure Reishi extract tailored for nervous system regulation and restful recovery.', 
-                    label: 'CAPS 45 REISHI ZEN', 
-                    img: 'img/item2_boost.png', 
+                    desc: 'Reducción del ruido mental.', 
+                    label: 'CAPS 45 MENTAL ZEN', 
+                    img: 'img/caps.png', 
                     imgBack: 'img/item2_boost_back.png', 
                     spec: '45 CAPS // 500 MG', 
-                    price: '89.000 COP', 
+                    price: '89.000', 
                     id: 'BR-02-ZEN' 
                 },
                 'STAMINA': { 
-                    desc: 'Premium adaptogenic capsules. High-potency Cordyceps extract engineered for cellular oxygenation and clean energy output.', 
-                    label: 'CAPS 45 CORDYCEPS STAMINA', 
-                    img: 'img/item2_stamina.png', 
+                    desc: 'Optimización del rendimiento energético celular.', 
+                    label: 'CAPS 45 BODY STAMINA', 
+                    img: 'img/caps.png', 
                     imgBack: 'img/item2_stamina_back.png', 
                     spec: '45 CAPS // 500 MG', 
-                    price: '85.000 COP', 
+                    price: '85.000', 
                     id: 'BR-02-STA' 
                 },
                 'CORE': { 
-                    desc: 'Premium adaptogenic capsules. Concentrated Turkey Tail extract for comprehensive gut health and immune defense.', 
-                    label: 'CAPS 45 TURKEY TAIL CORE', 
-                    img: 'img/item2_core.png', 
+                    desc: 'Sincronización inmunológica integral.', 
+                    label: 'CAPS 45 BODY CORE', 
+                    img: 'img/caps.png', 
                     imgBack: 'img/item2_core_back.png', 
                     spec: '45 CAPS // 500 MG', 
-                    price: '80.000 COP', 
+                    price: '80.000', 
                     id: 'BR-02-COR' 
                 }
             }
@@ -352,39 +352,39 @@
             defaultVariant: 'FOCUS',
             variants: {
                 'FOCUS': { 
-                    desc: 'Travel-size adaptogenic capsules. Concentrated Lion’s Mane for immediate mental clarity on-the-go.', 
+                    desc: 'Enfoque y claridad cognitiva.', 
                     label: 'CAPS 24 LION’S MANE FOCUS', 
                     img: 'img/item3_calm.png', 
                     imgBack: 'img/item3_calm_back.png', 
                     spec: '24 CAPS // 500 MG', 
-                    price: '48.000 COP', 
+                    price: '48.000', 
                     id: 'BR-03-FOC' 
                 },
                 'ZEN': { 
-                    desc: 'Travel-size adaptogenic capsules. Fast-acting Reishi extract for immediate decompression and mental relief.', 
+                    desc: 'Reducción del ruido mental.', 
                     label: 'CAPS 24 REISHI ZEN', 
                     img: 'img/item3_sleep.png', 
                     imgBack: 'img/item3_sleep_back.png', 
                     spec: '24 CAPS // 500 MG', 
-                    price: '52.000 COP', 
+                    price: '52.000', 
                     id: 'BR-03-ZEN' 
                 },
                 'STAMINA': { 
-                    desc: 'Travel-size adaptogenic capsules. Bioavailable Cordyceps to boost endurance and dynamic daily stamina.', 
+                    desc: 'Optimización del rendimiento energético celular.', 
                     label: 'CAPS 24 CORDYCEPS STAMINA', 
                     img: 'img/item3_stamina.png', 
                     imgBack: 'img/item3_stamina_back.png', 
                     spec: '24 CAPS // 500 MG', 
-                    price: '48.000 COP', 
+                    price: '48.000', 
                     id: 'BR-03-STA' 
                 },
                 'CORE': { 
-                    desc: 'Travel-size adaptogenic capsules. Turkey Tail extract formulated to protect your biological shield and vitality.', 
+                    desc: 'Sincronización inmunológica integral.', 
                     label: 'CAPS 24 TURKEY TAIL CORE', 
                     img: 'img/item3_core.png', 
                     imgBack: 'img/item3_core_back.png', 
                     spec: '24 CAPS // 500 MG', 
-                    price: '45.000 COP', 
+                    price: '$45.000', 
                     id: 'BR-03-COR' 
                 }
             }
@@ -393,28 +393,127 @@
 
 
 
+    // =========================================================================
+    // 2. CONFIGURACIÓN DE CATÁLOGOS EXTENDIDOS: LÍNEA SUGARRUSH (REPOSTERÍA)
+    // =========================================================================
     const SUGARRUSH_CATALOG = {
-        'POSTRE1': {
-            defaultVariant: 'CHOCO',
+        'ALFAJORES': {
+            defaultVariant: 'ALFAJOR X1',
             variants: {
-                'CHOCO': { desc: 'Chocolate amargo al 70% infusionado con destellos dorados comestibles.', label: 'SUGARRUSH CHOCO GLOW', img: 'img/sugar_choco.png', imgBack: 'img/sugar_choco_back.png', spec: '250 GRS // DELI-SIZE', price: '35.000 COP', id: 'SR-01-CHO' },
-                'VANILLA': { desc: 'Crema de vainilla de Papantla texturizada con base crocante futurista.', label: 'SUGARRUSH VANILLA SKY', img: 'img/sugar_vanilla.png', imgBack: 'img/sugar_vanilla_back.png', spec: '250 GRS // DELI-SIZE', price: '32.000 COP', id: 'SR-01-VAN' },
-                'BERRY': { desc: 'Coulis de frutos del bosque ácidos con esferificaciones de gelatina.', label: 'SUGARRUSH SWEET BERRY', img: 'img/sugar_berry.png', imgBack: 'img/sugar_berry_back.png', spec: '230 GRS // DELI-SIZE', price: '38.000 COP', id: 'SR-01-BER' },
-                'CARAMEL': { desc: 'Toffee salado fluido con cristales de sal marina a baja temperatura.', label: 'SUGARRUSH GOLD CARAMEL', img: 'img/sugar_caramel.png', imgBack: 'img/sugar_caramel_back.png', spec: '260 GRS // DELI-SIZE', price: '36.000 COP', id: 'SR-01-CAR' }
+                'ALFAJOR X1': {
+                    desc: 'Suave alfajor clásico para un antojo rápido.',
+                    label: 'SUGARRUSH ALFAJOR INDIVIDUAL',
+                    img: 'img/sugar_choco.png',
+                    imgBack: 'img/sugar_choco_back.png',
+                    spec: '1 UNIDAD // ANTOJO PERSONAL',
+                    price: '$3.500',
+                    id: 'SR-01-AX1'
+                },
+                'ALFAJOR X5': {
+                    desc: 'Suaves y tradicionales, perfectos para compartir.',
+                    label: 'SUGARRUSH ALFAJORES X5',
+                    img: 'img/sugar_vanilla.png',
+                    imgBack: 'img/sugar_vanilla_back.png',
+                    spec: '5 UNIDADES // PACK CLÁSICO',
+                    price: '$16.000',
+                    id: 'SR-01-AX5' 
+                },
+                'ALFAJOR X6': {
+                    desc: 'Variados: Maní x2, Coco x2, Leche Polvo x2.',
+                    label: 'SUGARRUSH ALFAJORES VARIADOS X6',
+                    img: 'img/sugar_berry.png',
+                    imgBack: 'img/sugar_berry_back.png',
+                    spec: '6 UNIDADES // RECOMENDADO',
+                    price: '$20.000',
+                    id: 'SR-01-AX6' 
+                }
             }
         },
-        'POSTRE2': {
-            defaultVariant: 'PISTACHIO',
+        'POSTRES': {
+            defaultVariant: 'LECHE ASADA',
             variants: {
-                'PISTACHIO': { desc: 'Gelato cremoso de pistacho puro de Sicilia emulsionado con nitrógeno.', label: 'ICE-LAB REAL PISTACHIO', img: 'img/postre2_pistachio.png', imgBack: 'img/postre2_pistachio_back.png', spec: '180 ML // ICE-LAB', price: '22.000 COP', id: 'SR-02-PST' },
-                'AMORETTI': { desc: 'Base de almendras tostadas con destilado artesanal dulce de la casa.', label: 'ICE-LAB SWEET AMORETTI', img: 'img/postre2_amoretti.png', imgBack: 'img/postre2_amoretti_back.png', spec: '180 ML // ICE-LAB', price: '25.000 COP', id: 'SR-02-AMO' }
+                'LECHE ASADA': {
+                    desc: 'Postre tradicional horneado con textura suave y cremosa.',
+                    label: 'POSTRE LECHE ASADA',
+                    img: 'img/sugar_choco.png',
+                    imgBack: 'img/sugar_choco_back.png',
+                    spec: 'PORCIÓN // TRADICIONAL',
+                    price: '$7.000', 
+                    id: 'SR-02-LAS'
+                },
+                'LECHE ASADA ESPECIAL': {
+                    desc: 'Nuestra receta clásica con un toque secreto especial.',
+                    label: 'POSTRE LECHE ASADA ESPECIAL',
+                    img: 'img/sugar_vanilla.png',
+                    imgBack: 'img/sugar_vanilla_back.png',
+                    spec: 'PORCIÓN // RECETA PREMIUM',
+                    price: '$9.500', 
+                    id: 'SR-02-LAE' 
+                }
             }
         },
-        'POSTRE3': {
-            defaultVariant: 'CITRIC',
+        'BROWNIES': {
+            defaultVariant: 'BROWNIE X1',
             variants: {
-                'CITRIC': { desc: 'Macarons crujientes rellenos de ganache cítrico hiper-concentrado.', label: 'MACARONS HYPER CITRIC', img: 'img/postre3_citric.png', imgBack: 'img/postre3_citric_back.png', spec: '6 CAPS // MINI-BOX', price: '28.000 COP', id: 'SR-03-CTR' },
-                'MATCHA': { desc: 'Macarons ceremoniales balanceados con perfiles herbales intensos.', label: 'MACARONS ZEN MATCHA', img: 'img/postre3_matcha.png', imgBack: 'img/postre3_matcha_back.png', spec: '6 CAPS // MINI-BOX', price: '30.000 COP', id: 'SR-03-MTC' }
+                'BROWNIE X1': { 
+                    desc: 'Porción melcochuda con el mejor cacao concentrado.', 
+                    label: 'BROWNIE INDIVIDUAL', 
+                    img: 'img/brownie_x1.png', 
+                    imgBack: 'img/back.png', 
+                    spec: '1 UNIDAD // SNACK PREMIUM', 
+                    price: '$5.000', 
+                    id: 'SR-03-BX1' 
+                },
+                'BROWNIE X20': { 
+                    desc: 'Caja de brownies melcochudos listos para compartir.', 
+                    label: 'BROWNIES X20 PACK', 
+                    img: 'img/brownies_x6.png', 
+                    imgBack: 'img/back.png', 
+                    spec: '20 UNIDADES // PACK COMPARTIR', 
+                    price: '$28.000', 
+                    id: 'SR-03-BX20' 
+                },
+                'BROWNIE X50': { 
+                    desc: 'Melcochudos con el toque justo de cacao.', 
+                    label: 'BROWNIES X50 PARTY PACK', 
+                    img: 'img/brownies_x50.png', 
+                    imgBack: 'img/back.png', 
+                    spec: '50 UNIDADES // EVENTOS', 
+                    price: '$100.000', 
+                    id: 'SR-03-BX50' 
+                }
+            }
+        },
+        'FIAMBRES': {
+            defaultVariant: 'POLLO',
+            variants: {
+                'POLLO': { 
+                    desc: 'Pollo, queso, bechamel y pasta artesanal.', 
+                    label: 'LASAÑA DE POLLO ARTESANAL', 
+                    img: 'img/lasagna_pollo.png', 
+                    imgBack: 'img/back.png', 
+                    spec: '14 X 11.5 CM // ARTESANAL', 
+                    price: '$20.000', 
+                    id: 'SR-04-LPO' 
+                },
+                'MIXTA': { 
+                    desc: 'Combinación artesanal de pollo, carne y queso.', 
+                    label: 'LASAÑA MIXTA PREMIUM', 
+                    img: 'img/lasagna_mixta.png', 
+                    imgBack: 'img/back.png', 
+                    spec: '14 X 11.5 CM // ARTESANAL', 
+                    price: '$22.000', 
+                    id: 'SR-04-LMX' 
+                },
+                'FIAMBRES': { 
+                    desc: 'Almuerzo tradicional empacado con sazón casera.', 
+                    label: 'FIAMBRE TRADICIONAL', 
+                    img: 'img/fiambres.png', 
+                    imgBack: 'img/back.png', 
+                    spec: 'PORCIÓN INDIVIDUAL // ALMUERZO', 
+                    price: '$30.000', 
+                    id: 'SR-04-FIA' 
+                }
             }
         }
     };
@@ -422,7 +521,7 @@
     let currentBioItem = 'BIORUSH';
     let currentBioVariant = 'FOCUS';
     let currentSugarItem = 'POSTRE1';
-    let currentSugarVariant = 'CHOCO';
+    let currentSugarVariant = 'ALFAJOR X1';
     const numeroCelular = "573243770474";
 
     // ==========================================
