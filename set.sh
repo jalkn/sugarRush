@@ -72,7 +72,7 @@ cat <<EOF > src/data/catalog.json
 }
 EOF
 
-# 4.5. Backend Cerebro (FastAPI Endpoint con edición dinámica)
+# 4.5. Backend Cerebro (FastAPI con actualización dinámica)
 cat << 'PY_EOF' > main.py
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
