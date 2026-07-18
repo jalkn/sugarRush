@@ -98,7 +98,7 @@ if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
 PY_EOF
 
-# 5. UI Base (Frontend con lógica de fetch integrada)
+# 5. UI Base (Frontend con renderizado dinámico)
 cat <<EOF > src/layouts/index.html
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
@@ -118,16 +118,27 @@ cat <<EOF > src/layouts/index.html
         <span class="text-[14px] tracking-[0.3em] uppercase font-sans">SUGARRUSH</span>
     </header>
     <main class="flex-1 flex flex-col items-center justify-center">
-        <div id="artepanel" class="w-64 h-64 rounded-full bg-black/20 backdrop-blur flex items-center justify-center">
-            <!-- Interacción futura aquí -->
+        <div id="sugarrush" class="w-64 h-64 rounded-full bg-black/20 backdrop-blur flex flex-col items-center justify-center p-6 text-center">
+            <span class="text-xs uppercase tracking-widest opacity-70">Cargando...</span>
         </div>
     </main>
     <script>
-        console.log("Sistema SugarRush inicializado.");
+        function renderSugarRush(data) {
+            const container = document.getElementById('sugarrush');
+            const item = data.ALFAJORES.variants['ALFAJOR X5'];
+            container.innerHTML = \`
+                <h2 class="text-sm font-bold uppercase">\${item.label}</h2>
+                <p class="text-2xl mt-2 font-mono">\${item.price}</p>
+            \`;
+        }
+
         fetch('http://localhost:8000/api/catalog')
             .then(res => res.json())
-            .then(data => console.log("Catálogo dinámico cargado desde FastAPI:", data))
-            .catch(err => console.error("Error conectando con el Centro de Comando:", err));
+            .then(data => renderSugarRush(data))
+            .catch(err => {
+                console.error("Error:", err);
+                document.getElementById('sugarrush').innerText = "OFFLINE";
+            });
     </script>
 </body>
 </html>
