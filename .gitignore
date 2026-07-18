@@ -1,1 +1,13 @@
 index2.html
+green-galaxy/
+node_modules/
+public/api
+src/
+templates/
+astro.config.mjs
+main.py
+package-lock.json
+package.json
+svg.py
+dist/
+.astro
