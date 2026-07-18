@@ -2,26 +2,317 @@
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link class="icon" type="image/png" href="img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SUGARRUSH.WORLD</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    screens: { 'xs': '400px' },
+                    colors: { 
+                        'jako-bg': 'var(--jako-bg)',
+                        'jako-text': 'var(--jako-text)',
+                        'jako-border': 'var(--jako-border)',
+                        'jako-glass': 'var(--jako-glass)',
+                        'jako-led': 'var(--jako-led)',
+                    },
+                    fontFamily: { 
+                        'sans': ['Orbitron', 'sans-serif'],
+                        'mono': ['Orbitron', 'monospace'],
+                        'body': ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root { --jako-bg: rgba(161, 106, 151, 0.95); }
-        body { background-color: var(--jako-bg); font-family: 'Plus Jakarta Sans', sans-serif; }
+        :root[data-theme="dark"] {
+            --jako-bg: rgba(190, 151, 183, 0.95); 
+            --jako-text: #ffffff;
+            --jako-border: rgba(255, 255, 255, 0.02);
+            --jako-glass: rgba(0, 0, 0, 0.6);
+            --jako-led: rgba(240, 245, 255, 0.85); /* Blanco con un levísimo tinte glacial */
+            --gradient-start: rgba(0, 140, 255, 0.025); /* Azul cobalto de alta dispersión */
+            --gradient-mid: rgba(10, 10, 10, 0.9);
+            --gradient-end: #222222;
+        }
+
+        body { 
+            overscroll-behavior: none;
+            background-color: var(--jako-bg);
+        }
+
+        #page-bg-overlay {
+            background: radial-gradient(circle at 50% 50%, var(--gradient-start) 35%, var(--gradient-mid) 85%, var(--gradient-end) 95%);
+        }
+
+        .border-custom { border-color: rgba(255, 255, 255, 0.15); }
+        .border-custom:hover { border-color: rgba(255, 255, 255, 0.6); }
+
+        /* UPPER BEZEL (FOOTER) - Captures light from above (Deep frosted glass effect) */
+        .glass-footer { 
+            border-top: 1px solid rgba(255, 255, 255, 0.12); 
+            box-shadow: inset 0 1px 0px rgba(255, 255, 255, 0.08); /* Double light edge */
+            backdrop-filter: blur(40px) saturate(120%); 
+            -webkit-backdrop-filter: blur(40px) saturate(120%);
+        }
+
+        /* LOWER BEZEL (HEADER) - Exact mirror, captures light from below */
+        .glass-header { 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12); 
+            box-shadow: inset 0 -1px 0px rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(40px) saturate(120%); 
+            -webkit-backdrop-filter: blur(40px) saturate(120%);
+        }
+
+        #main-vault, header, footer {
+            position: relative;
+            z-index: 10;
+        }
+
+        .img-glow-transition {
+            transition: background-image 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s ease-out;
+        }
     </style>
 </head>
-<body class="h-screen flex flex-col items-center justify-center text-white">
-    <header class="glass-header w-full p-5 text-center">
-        <span class="text-[14px] tracking-[0.3em] uppercase font-sans">SUGARRUSH</span>
-    </header>
-    <main class="flex-1 flex flex-col items-center justify-center">
-        <div id="artepanel" class="w-64 h-64 rounded-full bg-black/20 backdrop-blur flex items-center justify-center">
-            <!-- Interacción futura aquí -->
-        </div>
-    </main>
+<body class="antialiased selection:bg-jako-text selection:text-jako-bg overflow-hidden h-screen w-screen transition-colors duration-500 text-jako-text font-body">
+
+    <!-- Tres bloques integrados de forma transparente dentro del mismo fondo con gradiente -->
+    <div id="page-bg-overlay" class="fixed inset-0 z-10 translate-z-0 flex flex-col justify-between h-full w-full">
+
+        <!-- Block 1: Identidad de Marca (Header con Lower Bezel) -->
+        <header class="w-full shrink-0 z-50 py-5 px-9 flex justify-center items-center glass-header">
+            <div class="w-full max-w-[480px] sm:max-w-[675px] flex items-center justify-between gap-3">
+                <!-- Botón de navegación izquierda de categorías -->
+                <button onclick="navegarCategoria(-1)" class="p-3 text-[13.5px] font-mono leading-none select-none opacity-50 hover:opacity-100 transition-opacity duration-300 text-white shrink-0">◀</button>
+                
+                <div class="flex flex-col items-center justify-center gap-1 w-full max-w-[270px]"> 
+                    <!-- Branded engraved text using Orbitron Monospace font -->
+                    <span class="jako-led text-[14px] md:text-[17px] tracking-[0.3em] uppercase font-sans text-center">SUGARRUSH</span>
+                    <!-- Indicador dinámico de categoría activa -->
+                    <span id="sugar-category-indicator" class="text-[7.5px] font-mono tracking-[0.25em] opacity-40 uppercase">ALFAJORES</span>
+                </div>
+
+                <!-- Botón de navegación derecha de categorías -->
+                <button onclick="navegarCategoria(1)" class="p-3 text-[13.5px] font-mono leading-none select-none opacity-50 hover:opacity-100 transition-opacity duration-300 text-white shrink-0">▶</button>
+            </div>
+        </header>
+
+        <!-- Block 2: Panel Central de Interacción (Disco Acrílico Esmerilado Circular con Trigger de Checkout) -->
+        <main id="main-vault" class="flex-1 w-full flex flex-col items-center justify-center relative overflow-hidden z-10 px-6 gap-6">
+            
+            <!-- Contenedor del Disco Circular Original -->
+            <div id="artepanel-pack-container" onclick="adquirirNodoSugar()" class="relative w-[50vw] h-[50vw] sm:w-[50vw] sm:h-[50vw] md:w-[30vh] md:h-[30vh] max-w-[300px] max-h-[300px] min-w-[225px] min-h-[225px] aspect-square shrink-0 rounded-full overflow-hidden [clip-path:circle(50%)] isolate translate-z-0 drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)] cursor-pointer hover:scale-[1.03] transition-transform duration-300">
+                <div id="artepanel-mask-wrapper" class="w-full h-full relative overflow-hidden [clip-path:circle(50%)] img-glow-transition bg-cover bg-center" style="background-image: url('img/alfajores_x5.jpg');">
+                    <!-- Overlay sutil interno para ganar contraste en textos si es necesario -->
+                    <div class="absolute inset-0 bg-black/10 mix-blend-overlay"></div>
+                </div>
+            </div>
+
+            <!-- Bloque de Metadata Técnica Integrada en el área central (Estilo Técnico Limpio) -->
+            <div class="flex flex-col items-center text-center max-w-[380px] gap-2 px-4 z-20">
+                <p id="sugar-variant-desc" class="font-body text-[11px] md:text-xs text-white/70 tracking-wide leading-relaxed min-h-[34px]">
+                    Cargando especificaciones...
+                </p>
+                <div class="flex items-center gap-3 font-mono text-[9px] tracking-widest text-white/40 uppercase">
+                    <span id="sugar-variant-spec">-</span>
+                    <span>|</span>
+                    <span id="sugar-variant-price" class="text-white font-bold tracking-normal">-</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Block 3: Navegación de Sub-Variantes (Footer con Upper Bezel y Controles Alineados) -->
+        <footer class="w-full shrink-0 z-50 py-5 px-9 flex justify-center items-center glass-footer">
+            <div class="w-full max-w-[480px] sm:max-w-[675px] flex items-center justify-between gap-3">
+                <!-- Trigger de Sub-variante Anterior -->
+                <button onclick="navigateVariant(-1)" class="opacity-50 hover:opacity-100 transition-opacity duration-300 p-3 text-[13.5px] font-mono leading-none text-white shrink-0">◀</button>
+                
+                <!-- Display Central de Sub-variante -->
+                <div class="flex-1 flex justify-center items-center min-w-0">
+                    <svg class="w-full max-w-[270px] h-6 fill-none" viewBox="0 0 200 16">
+                        <text id="laser-variant-title-footer" x="50%" y="13" text-anchor="middle" class="jako-led fill-current font-mono text-[8.5px] md:text-[10px] tracking-[0.25em] uppercase transition-all duration-500">
+                            ALFAJOR X5
+                        </text>
+                    </svg>
+                </div>
+                
+                <!-- Trigger de Sub-variante Siguiente -->
+                <button onclick="navigateVariant(1)" class="opacity-50 hover:opacity-100 transition-opacity duration-300 p-3 text-[13.5px] font-mono leading-none text-white shrink-0">▶</button>
+            </div>
+        </footer>
+
+    </div>
+
     <script>
-        console.log("Sistema SugarRush inicializado.");
+        // =========================================================================
+        // 1. DATA CATÁLOGO CRUDA - SUGARRUSH ORIGINAL MAPPED
+        // =========================================================================
+        const SUGARRUSH_CATALOG = {
+            'ALFAJORES': {
+                defaultVariant: 'ALFAJOR X5',
+                variants: {
+                    'ALFAJOR X5': {
+                        desc: 'Clásicos y suaves, perfectos para un antojo personal.',
+                        label: 'SUGARRUSH ALFAJORES X5',
+                        img: 'img/alfajores_x5.jpg',
+                        spec: '5 UNIDADES // PACK CLÁSICO',
+                        price: '$16.000',
+                        id: 'SR-ALF-X5'
+                    },
+                    'ALFAJOR X6': {
+                        desc: 'Caja premium variada: Maní x2, Coco x2, Leche en Polvo x2.',
+                        label: 'ALFAJORES VARIADOS X6',
+                        img: 'img/alfajores_x6.png',
+                        spec: '6 UNIDADES // RECOMENDADO',
+                        price: '$20.000',
+                        id: 'SR-ALF-X6' 
+                    },
+                    'ALFAJOR X50': {
+                        desc: 'La dosis ideal de dulzura para tus banquetes y eventos masivos.',
+                        label: 'ALFAJORES PARTY PACK X50',
+                        img: 'img/alfajores_x50.png',
+                        spec: '50 UNIDADES // BULK TRADICIONAL',
+                        price: '$100.000',
+                        id: 'SR-ALF-X50' 
+                    }
+                }
+            },
+            'POSTRES': {
+                defaultVariant: 'MARIA LUISA',
+                variants: {
+                    'MARIA LUISA': {
+                        desc: 'Tradicional bizcochuelo esponjoso balanceado con capas de mora y arequipe.',
+                        label: 'TORTA MARÍA LUISA',
+                        img: 'img/torta_marialuisa.png',
+                        spec: 'TORTA ENTERA // ARTESANAL',
+                        price: '$45.000', 
+                        id: 'SR-POST-ML'
+                    }
+                }
+            },
+            'BROWNIES': {
+                defaultVariant: 'BROWNIE X50',
+                variants: {
+                    'BROWNIE X50': { 
+                        desc: 'Melcochudos y con el toque justo de cacao gourmet puro. ¡Ideal para compartir!', 
+                        label: 'PACK BROWNIES X50', 
+                        img: 'img/brownies_x50.png', 
+                        spec: '50 UNIDADES // METROPOLITAN PACK', 
+                        price: '$100.000', 
+                        id: 'SR-BRW-X50' 
+                    }
+                }
+            },
+            'FIAMBRES': {
+                defaultVariant: 'LASAÑA POLLO',
+                variants: {
+                    'LASAÑA POLLO': { 
+                        desc: 'Pollo desmechado, queso fundido, salsa bechamel de la casa y pasta artesanal. (14 x 11.5 cm)', 
+                        label: 'LASAÑA DE POLLO ARTESANAL', 
+                        img: 'img/lasagna_pollo.png', 
+                        spec: 'DIMENSIONES 14x11.5 CM', 
+                        price: '$20.000', 
+                        id: 'SR-FIAM-LPO' 
+                    }
+                }
+            }
+        };
+
+        // Estados Globales del Flux
+        let currentCategory = 'ALFAJORES';
+        let currentVariant = 'ALFAJOR X5';
+        const numeroCelular = "573243770474";
+
+        const $ = id => document.getElementById(id);
+
+        // =========================================================================
+        // 2. MOTOR LOGÍSTICO Y CONTROLADORES DE RENDERIZADO (Index2 Logic)
+        // =========================================================================
+        
+        // Ciclado entre Categorías Principales (Header Triggers)
+        function navegarCategoria(direction) {
+            const categories = Object.keys(SUGARRUSH_CATALOG);
+            let index = categories.indexOf(currentCategory);
+            index = (index + direction + categories.length) % categories.length;
+            
+            currentCategory = categories[index];
+            // Resetea automáticamente a la variante por defecto asignada en el core mapping
+            currentVariant = SUGARRUSH_CATALOG[currentCategory].defaultVariant;
+            
+            actualizarInterfaz();
+            if (navigator.vibrate) navigator.vibrate(10);
+        }
+
+        // Ciclado entre Sub-Variantes Internas (Footer Triggers)
+        function navigateVariant(direction) {
+            const variants = Object.keys(SUGARRUSH_CATALOG[currentCategory].variants);
+            let index = variants.indexOf(currentVariant);
+            index = (index + direction + variants.length) % variants.length;
+            
+            currentVariant = variants[index];
+            
+            actualizarInterfaz();
+            if (navigator.vibrate) navigator.vibrate(8);
+        }
+
+        // Sincronización Integral de UI y Atributos Visuales
+        function actualizarInterfaz() {
+            const dataCategoria = SUGARRUSH_CATALOG[currentCategory];
+            const dataVariante = dataCategoria.variants[currentVariant];
+
+            // 1. Actualizar Textos en Header e Indicadores
+            if ($('sugar-category-indicator')) {
+                $('sugar-category-indicator').textContent = currentCategory;
+            }
+
+            // 2. Transición y actualización de Imagen en el Disco Central
+            const wrapper = $('artepanel-mask-wrapper');
+            if (wrapper) {
+                wrapper.style.transform = "scale(0.95)";
+                setTimeout(() => {
+                    wrapper.style.backgroundImage = `url('${dataVariante.img}')`;
+                    wrapper.style.transform = "scale(1)";
+                }, 150);
+            }
+
+            // 3. Sincronizar Ficha Técnica Central
+            if ($('sugar-variant-desc')) $('sugar-variant-desc').textContent = dataVariante.desc;
+            if ($('sugar-variant-spec')) $('sugar-variant-spec').textContent = dataVariante.spec;
+            if ($('sugar-variant-price')) $('sugar-variant-price').textContent = dataVariante.price;
+
+            // 4. Actualizar Indicador del Footer (Texto SVG Láser Engraved)
+            const labelTitleFooter = $('laser-variant-title-footer');
+            if (labelTitleFooter) {
+                labelTitleFooter.textContent = currentVariant;
+            }
+        }
+
+        // =========================================================================
+        // 3. SISTEMA DE DESPACHO E INTEGRACIÓN CON WHATSAPP
+        // =========================================================================
+        function adquirirNodoSugar() {
+            const configActual = SUGARRUSH_CATALOG[currentCategory].variants[currentVariant];
+            const mensaje = `🧁 *NUEVA ORDEN - SUGARRUSH.WORLD* 🧁\n\n` +
+                            `• *Categoría:* ${currentCategory}\n` +
+                            `• *Producto:* ${configActual.label}\n` +
+                            `• *Presentación:* ${configActual.spec}\n` +
+                            `• *Precio:* ${configActual.price}\n` +
+                            `• *Token:* \`${configActual.id}\`\n\n` +
+                            `Solicito verificar disponibilidad para el despacho de esta orden.`;
+
+            const urlWhatsapp = `https://api.whatsapp.com/send?phone=${numeroCelular}&text=${encodeURIComponent(mensaje)}`;
+            if (navigator.vibrate) navigator.vibrate([10, 25, 10]);
+            window.open(urlWhatsapp, '_blank');
+        }
+
+        // Inicialización nativa al cargar DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            actualizarInterfaz();
+        });
     </script>
 </body>
 </html>
