@@ -1,156 +1,346 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <link class="icon" type="image/png" href="img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SUGARRUSH.WORLD</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fuentes Web -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = { 
-            theme: { 
-                extend: { 
-                    screens: { 'xs': '400px' },
-                    colors: { 
-                        'jako-bg': 'var(--jako-bg)',
-                        'jako-text': 'var(--jako-text)',
-                        'jako-border': 'var(--jako-border)',
-                        'jako-glass': 'var(--jako-glass)',
-                        'jako-led': 'var(--jako-led)',
-                    },
-                    fontFamily: { 
-                        'sans': ['Orbitron', 'sans-serif'],
-                        'mono': ['Orbitron', 'monospace'],
-                        'body': ['Plus Jakarta Sans', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+    
     <style>
+        /* Variables y Reset */
         :root[data-theme="dark"] {
             --jako-bg: rgba(190, 151, 183, 0.95); 
             --jako-text: #ffffff;
             --jako-border: rgba(255, 255, 255, 0.02);
             --jako-glass: rgba(0, 0, 0, 0.6);
-            --jako-led: rgba(240, 245, 255, 0.85); /* Blanco con un levísimo tinte glacial */
-            --gradient-start: rgba(0, 140, 255, 0.025); /* Azul cobalto de alta dispersión */
+            --jako-led: rgba(240, 245, 255, 0.85);
+            --gradient-start: rgba(0, 140, 255, 0.025);
             --gradient-mid: rgba(10, 10, 10, 0.9);
             --gradient-end: #222222;
+            
+            --font-sans: 'Orbitron', sans-serif;
+            --font-mono: 'Orbitron', monospace;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body { 
             overscroll-behavior: none;
             background-color: var(--jako-bg);
+            color: var(--jako-text);
+            font-family: var(--font-body);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            transition: color 0.5s ease;
+            -webkit-font-smoothing: antialiased;
         }
 
+        ::selection {
+            background-color: var(--jako-text);
+            color: var(--jako-bg);
+        }
+
+        /* Estructura Principal */
         #page-bg-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            width: 100%;
             background: radial-gradient(circle at 50% 50%, var(--gradient-start) 35%, var(--gradient-mid) 85%, var(--gradient-end) 95%);
         }
 
-        .border-custom { border-color: rgba(255, 255, 255, 0.15); }
-        .border-custom:hover { border-color: rgba(255, 255, 255, 0.6); }
-
-        /* UPPER BEZEL (FOOTER) - Captures light from above (Deep frosted glass effect) */
-        .glass-footer { 
-            border-top: 1px solid rgba(255, 255, 255, 0.12); 
-            box-shadow: inset 0 1px 0px rgba(255, 255, 255, 0.08); /* Double light edge */
-            backdrop-filter: blur(40px) saturate(120%); 
-            -webkit-backdrop-filter: blur(40px) saturate(120%);
-        }
-
-        /* LOWER BEZEL (HEADER) - Exact mirror, captures light from below */
+        /* Glassmorphism Headers & Footers */
         .glass-header { 
+            width: 100%;
+            flex-shrink: 0;
+            z-index: 50;
+            padding: 1.25rem 2.25rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.12); 
             box-shadow: inset 0 -1px 0px rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(40px) saturate(120%); 
             -webkit-backdrop-filter: blur(40px) saturate(120%);
         }
 
-        #main-vault, header, footer {
-            position: relative;
-            z-index: 10;
+        .glass-footer { 
+            width: 100%;
+            flex-shrink: 0;
+            z-index: 50;
+            padding: 1.25rem 2.25rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.12); 
+            box-shadow: inset 0 1px 0px rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(40px) saturate(120%); 
+            -webkit-backdrop-filter: blur(40px) saturate(120%);
         }
 
-        .img-glow-transition {
+        .nav-container {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        @media (min-width: 640px) {
+            .nav-container { max-width: 675px; }
+        }
+
+        /* Botones de Navegación */
+        .nav-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.75rem;
+            font-size: 13.5px;
+            font-family: var(--font-mono);
+            line-height: 1;
+            user-select: none;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .nav-btn:hover { opacity: 1; }
+
+        /* Componentes Tipográficos */
+        .brand-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            width: 100%;
+            max-width: 270px;
+        }
+
+        .brand-title {
+            color: var(--jako-led);
+            font-size: 14px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            font-family: var(--font-sans);
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .brand-title { font-size: 17px; }
+        }
+
+        .category-indicator {
+            font-size: 7.5px;
+            font-family: var(--font-mono);
+            letter-spacing: 0.25em;
+            opacity: 0.4;
+            text-transform: uppercase;
+        }
+
+        /* Áreas de Contenido Central */
+        #main-vault {
+            position: relative;
+            z-index: 10;
+            flex: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0 1.5rem;
+            gap: 1.5rem;
+        }
+
+        #artepanel-pack-container {
+            position: relative;
+            width: 50vw;
+            height: 50vw;
+            max-width: 300px;
+            max-height: 300px;
+            min-width: 225px;
+            min-height: 225px;
+            aspect-ratio: 1 / 1;
+            flex-shrink: 0;
+            border-radius: 50%;
+            overflow: hidden;
+            clip-path: circle(50%);
+            filter: drop-shadow(0 25px 60px rgba(0,0,0,0.95));
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        #artepanel-pack-container:hover { transform: scale(1.03); }
+
+        @media (min-width: 768px) {
+            #artepanel-pack-container {
+                width: 30vh;
+                height: 30vh;
+            }
+        }
+
+        #artepanel-mask-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            clip-path: circle(50%);
+            background-size: cover;
+            background-position: center;
             transition: background-image 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s ease-out;
+        }
+
+        .img-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            mix-blend-mode: overlay;
+        }
+
+        /* Ficha Técnica */
+        .meta-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 380px;
+            gap: 0.5rem;
+            padding: 0 1rem;
+            z-index: 20;
+        }
+
+        .meta-desc {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.025em;
+            line-height: 1.6;
+            min-height: 34px;
+        }
+
+        @media (min-width: 768px) {
+            .meta-desc { font-size: 12px; }
+        }
+
+        .meta-specs {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+        }
+
+        .price-text {
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: normal;
+        }
+
+        /* SVG Footer */
+        .variant-display {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 0;
+        }
+
+        .laser-svg {
+            width: 100%;
+            max-width: 270px;
+            height: 1.5rem;
+            fill: none;
+        }
+
+        .laser-text {
+            fill: var(--jako-led);
+            font-family: var(--font-mono);
+            font-size: 8.5px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            transition: all 0.5s ease;
+        }
+
+        @media (min-width: 768px) {
+            .laser-text { font-size: 10px; }
         }
     </style>
 </head>
-<body class="antialiased selection:bg-jako-text selection:text-jako-bg overflow-hidden h-screen w-screen transition-colors duration-500 text-jako-text font-body">
+<body>
 
-    <!-- Tres bloques integrados de forma transparente dentro del mismo fondo con gradiente -->
-    <div id="page-bg-overlay" class="fixed inset-0 z-10 translate-z-0 flex flex-col justify-between h-full w-full">
+    <div id="page-bg-overlay">
 
-        <!-- Block 1: Identidad de Marca (Header con Lower Bezel) -->
-        <header class="w-full shrink-0 z-50 py-5 px-9 flex justify-center items-center glass-header">
-            <div class="w-full max-w-[480px] sm:max-w-[675px] flex items-center justify-between gap-3">
-                <!-- Botón de navegación izquierda de categorías -->
-                <button onclick="navegarCategoria(-1)" class="p-3 text-[13.5px] font-mono leading-none select-none opacity-50 hover:opacity-100 transition-opacity duration-300 text-white shrink-0">◀</button>
-                
-                <div class="flex flex-col items-center justify-center gap-1 w-full max-w-[270px]"> 
-                    <!-- Branded engraved text using Orbitron Monospace font -->
-                    <span class="jako-led text-[14px] md:text-[17px] tracking-[0.3em] uppercase font-sans text-center">SUGARRUSH</span>
-                    <!-- Indicador dinámico de categoría activa -->
-                    <span id="sugar-category-indicator" class="text-[7.5px] font-mono tracking-[0.25em] opacity-40 uppercase">ALFAJORES</span>
+        <!-- Header -->
+        <header class="glass-header">
+            <div class="nav-container">
+                <button onclick="navegarCategoria(-1)" class="nav-btn">◀</button>
+                <div class="brand-wrapper"> 
+                    <span class="brand-title">SUGARRUSH</span>
+                    <span id="sugar-category-indicator" class="category-indicator">ALFAJORES</span>
                 </div>
-
-                <!-- Botón de navegación derecha de categorías -->
-                <button onclick="navegarCategoria(1)" class="p-3 text-[13.5px] font-mono leading-none select-none opacity-50 hover:opacity-100 transition-opacity duration-300 text-white shrink-0">▶</button>
+                <button onclick="navegarCategoria(1)" class="nav-btn">▶</button>
             </div>
         </header>
 
-        <!-- Block 2: Panel Central de Interacción (Disco Acrílico Esmerilado Circular con Trigger de Checkout) -->
-        <main id="main-vault" class="flex-1 w-full flex flex-col items-center justify-center relative overflow-hidden z-10 px-6 gap-6">
-            
-            <!-- Contenedor del Disco Circular Original -->
-            <div id="artepanel-pack-container" onclick="adquirirNodoSugar()" class="relative w-[50vw] h-[50vw] sm:w-[50vw] sm:h-[50vw] md:w-[30vh] md:h-[30vh] max-w-[300px] max-h-[300px] min-w-[225px] min-h-[225px] aspect-square shrink-0 rounded-full overflow-hidden [clip-path:circle(50%)] isolate translate-z-0 drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)] cursor-pointer hover:scale-[1.03] transition-transform duration-300">
-                <div id="artepanel-mask-wrapper" class="w-full h-full relative overflow-hidden [clip-path:circle(50%)] img-glow-transition bg-cover bg-center" style="background-image: url('img/alfajores_x5.jpg');">
-                    <!-- Overlay sutil interno para ganar contraste en textos si es necesario -->
-                    <div class="absolute inset-0 bg-black/10 mix-blend-overlay"></div>
+        <!-- Main -->
+        <main id="main-vault">
+            <div id="artepanel-pack-container" onclick="adquirirNodoSugar()">
+                <div id="artepanel-mask-wrapper" style="background-image: url('img/alfajores_x5.jpg');">
+                    <div class="img-overlay"></div>
                 </div>
             </div>
 
-            <!-- Bloque de Metadata Técnica Integrada en el área central (Estilo Técnico Limpio) -->
-            <div class="flex flex-col items-center text-center max-w-[380px] gap-2 px-4 z-20">
-                <p id="sugar-variant-desc" class="font-body text-[11px] md:text-xs text-white/70 tracking-wide leading-relaxed min-h-[34px]">
+            <div class="meta-container">
+                <p id="sugar-variant-desc" class="meta-desc">
                     Cargando especificaciones...
                 </p>
-                <div class="flex items-center gap-3 font-mono text-[9px] tracking-widest text-white/40 uppercase">
+                <div class="meta-specs">
                     <span id="sugar-variant-spec">-</span>
                     <span>|</span>
-                    <span id="sugar-variant-price" class="text-white font-bold tracking-normal">-</span>
+                    <span id="sugar-variant-price" class="price-text">-</span>
                 </div>
             </div>
         </main>
 
-        <!-- Block 3: Navegación de Sub-Variantes (Footer con Upper Bezel y Controles Alineados) -->
-        <footer class="w-full shrink-0 z-50 py-5 px-9 flex justify-center items-center glass-footer">
-            <div class="w-full max-w-[480px] sm:max-w-[675px] flex items-center justify-between gap-3">
-                <!-- Trigger de Sub-variante Anterior -->
-                <button onclick="navigateVariant(-1)" class="opacity-50 hover:opacity-100 transition-opacity duration-300 p-3 text-[13.5px] font-mono leading-none text-white shrink-0">◀</button>
+        <!-- Footer -->
+        <footer class="glass-footer">
+            <div class="nav-container">
+                <button onclick="navigateVariant(-1)" class="nav-btn">◀</button>
                 
-                <!-- Display Central de Sub-variante -->
-                <div class="flex-1 flex justify-center items-center min-w-0">
-                    <svg class="w-full max-w-[270px] h-6 fill-none" viewBox="0 0 200 16">
-                        <text id="laser-variant-title-footer" x="50%" y="13" text-anchor="middle" class="jako-led fill-current font-mono text-[8.5px] md:text-[10px] tracking-[0.25em] uppercase transition-all duration-500">
+                <div class="variant-display">
+                    <svg class="laser-svg" viewBox="0 0 200 16">
+                        <text id="laser-variant-title-footer" x="50%" y="13" text-anchor="middle" class="laser-text">
                             ALFAJOR X5
                         </text>
                     </svg>
                 </div>
                 
-                <!-- Trigger de Sub-variante Siguiente -->
-                <button onclick="navigateVariant(1)" class="opacity-50 hover:opacity-100 transition-opacity duration-300 p-3 text-[13.5px] font-mono leading-none text-white shrink-0">▶</button>
+                <button onclick="navigateVariant(1)" class="nav-btn">▶</button>
             </div>
         </footer>
 
     </div>
 
     <script>
-        // =========================================================================
-        // 1. DATA CATÁLOGO CRUDA - SUGARRUSH ORIGINAL MAPPED
-        // =========================================================================
         const SUGARRUSH_CATALOG = {
             'ALFAJORES': {
                 defaultVariant: 'ALFAJOR X5',
@@ -222,32 +412,24 @@
             }
         };
 
-        // Estados Globales del Flux
         let currentCategory = 'ALFAJORES';
         let currentVariant = 'ALFAJOR X5';
         const numeroCelular = "573243770474";
 
         const $ = id => document.getElementById(id);
 
-        // =========================================================================
-        // 2. MOTOR LOGÍSTICO Y CONTROLADORES DE RENDERIZADO (Index2 Logic)
-        // =========================================================================
-        
-        // Ciclado entre Categorías Principales (Header Triggers)
         function navegarCategoria(direction) {
             const categories = Object.keys(SUGARRUSH_CATALOG);
             let index = categories.indexOf(currentCategory);
             index = (index + direction + categories.length) % categories.length;
             
             currentCategory = categories[index];
-            // Resetea automáticamente a la variante por defecto asignada en el core mapping
             currentVariant = SUGARRUSH_CATALOG[currentCategory].defaultVariant;
             
             actualizarInterfaz();
             if (navigator.vibrate) navigator.vibrate(10);
         }
 
-        // Ciclado entre Sub-Variantes Internas (Footer Triggers)
         function navigateVariant(direction) {
             const variants = Object.keys(SUGARRUSH_CATALOG[currentCategory].variants);
             let index = variants.indexOf(currentVariant);
@@ -259,17 +441,14 @@
             if (navigator.vibrate) navigator.vibrate(8);
         }
 
-        // Sincronización Integral de UI y Atributos Visuales
         function actualizarInterfaz() {
             const dataCategoria = SUGARRUSH_CATALOG[currentCategory];
             const dataVariante = dataCategoria.variants[currentVariant];
 
-            // 1. Actualizar Textos en Header e Indicadores
             if ($('sugar-category-indicator')) {
                 $('sugar-category-indicator').textContent = currentCategory;
             }
 
-            // 2. Transición y actualización de Imagen en el Disco Central
             const wrapper = $('artepanel-mask-wrapper');
             if (wrapper) {
                 wrapper.style.transform = "scale(0.95)";
@@ -279,21 +458,16 @@
                 }, 150);
             }
 
-            // 3. Sincronizar Ficha Técnica Central
             if ($('sugar-variant-desc')) $('sugar-variant-desc').textContent = dataVariante.desc;
             if ($('sugar-variant-spec')) $('sugar-variant-spec').textContent = dataVariante.spec;
             if ($('sugar-variant-price')) $('sugar-variant-price').textContent = dataVariante.price;
 
-            // 4. Actualizar Indicador del Footer (Texto SVG Láser Engraved)
             const labelTitleFooter = $('laser-variant-title-footer');
             if (labelTitleFooter) {
                 labelTitleFooter.textContent = currentVariant;
             }
         }
 
-        // =========================================================================
-        // 3. SISTEMA DE DESPACHO E INTEGRACIÓN CON WHATSAPP
-        // =========================================================================
         function adquirirNodoSugar() {
             const configActual = SUGARRUSH_CATALOG[currentCategory].variants[currentVariant];
             const mensaje = `🧁 *NUEVA ORDEN - SUGARRUSH.WORLD* 🧁\n\n` +
@@ -309,7 +483,6 @@
             window.open(urlWhatsapp, '_blank');
         }
 
-        // Inicialización nativa al cargar DOM
         document.addEventListener('DOMContentLoaded', () => {
             actualizarInterfaz();
         });

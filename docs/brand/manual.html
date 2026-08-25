@@ -1,32 +1,3 @@
-#!/bin/bash
-
-# ==============================================================================
-# BIORUSH - MASTER SETUP & DEPLOYMENT SCRIPT (SYNC V2 - BRAND MANUAL ADDED)
-# ==============================================================================
-
-CYAN='\033[0;36m'
-MAGENTA='\033[0;35m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-GRAY='\033[0;90m'
-NC='\033[0m'
-
-echo -e "${MAGENTA}🚀 Iniciando despliegue total de BioRush (rush-core)...${NC}"
-
-# 1. Purga de caché
-CACHE_PATHS=(".astro" "dist" "node_modules/.vite")
-for path in "${CACHE_PATHS[@]}"; do
-    if [ -d "$path" ]; then
-        echo -e "${GRAY}🧹 Dropping: $path${NC}"
-        rm -rf "$path"
-    fi
-done
-
-# 2. Estructura base (Aseguramos src/pages y docs/brand)
-mkdir -p src/data img svg public/api src/pages docs/brand
-
-# 2.1. Creación del Manual de Marca HTML
-cat << 'HTML_EOF' > docs/brand/manual.html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -157,11 +128,16 @@ cat << 'HTML_EOF' > docs/brand/manual.html
 
         <section>
             <h2>01. Propósito & Modelo Operativo</h2>
-            <p><strong>BIORUSH</strong> opera como una cocina/restaurante virtual desde Santa Elena, Antioquia, enfocada en la elaboración de alimentos nutritivos y repostería saludable.</p>
+            <p><strong>BIORUSH</strong> opera como un concepto de <strong>Restaurante Virtual / Cocina Cloud</strong> con base en Santa Elena, Antioquia. Integra en una única propuesta la cocina tradicional bio-artesanal y la repostería consciente.</p>
             <ul>
-                <li><strong>Canal de Pedidos:</strong> WhatsApp disponible 24/7.</li>
-                <li><strong>Ventana de Entregas:</strong> Lunes a Viernes de 12:00 PM a 6:00 PM.</li>
-                <li><strong>Oferta Culinaria:</strong> Fiambres, tamales tradicionales y línea dulce (galletas, postres y tortas artesanales).</li>
+                <li><strong>Atención & Pedidos:</strong> Canal de WhatsApp automatizado y abierto <strong>24/7</strong> para recepción de órdenes.</li>
+                <li><strong>Ventana de Despacho & Logística:</strong> Envíos programados de <strong>Lunes a Viernes de 12:00 PM a 6:00 PM</strong>.</li>
+                <li><strong>Menú Integrado BIORUSH:</strong>
+                    <ul>
+                        <li><em>Línea Salada:</em> Fiambres montañeros y tamales tradicionales hechos en Santa Elena.</li>
+                        <li><em>Línea Dulce & Pastelería:</em> Galletas, postres, tortas y flanes artesanales con perfil saludable y funcional.</li>
+                    </ul>
+                </li>
             </ul>
         </section>
 
@@ -169,10 +145,17 @@ cat << 'HTML_EOF' > docs/brand/manual.html
             <h2>02. Tipografía Institucional</h2>
             <h3>Tipografía Principal (Logo & Titulados)</h3>
             <p><strong>Estilo:</strong> Sans-Serif Display Condensed / Rounded Grotesque Bold.</p>
-            <p><strong>Fuentes recomendadas:</strong> <code>Fredoka Bold</code>, <code>Signika Bold</code>, <code>Mpro Rounded</code>, <code>Nunito ExtraBold</code>.</p>
+            <p><strong>Muestra tipográfica:</strong></p>
+<div style="font-family: 'Fredoka', 'Signika', sans-serif; font-size: 2.2rem; font-weight: 900; transform: scaleY(1.5); text-align: center; position: relative; display: inline-block;">
+    <!-- Capa trasera para generar el contorno y grosor extra -->
+    <span style="position: absolute; top: 0; left: 0; width: 100%; color: var(--primary-dark); -webkit-text-stroke: 16px var(--primary-dark); z-index: 1;">BIORUSH</span>
+    <!-- Capa delantera con el relleno crema -->
+    <span style="position: relative; color: var(--accent-cream); z-index: 2;">BIORUSH</span>
+</div>
+            <p><strong>Fuentes equivalentes recomendadas:</strong> <code>Fredoka Bold</code>, <code>Signika Bold</code>, <code>Mpro Rounded</code>, <code>Nunito ExtraBold</code>.</p>
 
             <h3>Tipografía Secundaria (Cuerpos de Texto & Menú)</h3>
-            <p><strong>Estilo:</strong> Sans-Serif Limpia de Alta Legibilidad (<code>Inter</code>, <code>System UI</code>).</p>
+            <p><strong>Estilo:</strong> Sans-Serif Limpia / Humanista de Alta Legibilidad (<code>Inter</code>, <code>System UI</code>, <code>Open Sans</code>).</p>
         </section>
 
         <section>
@@ -212,104 +195,3 @@ cat << 'HTML_EOF' > docs/brand/manual.html
 
 </body>
 </html>
-HTML_EOF
-
-# 3. Manifest (rush-core)
-cat << 'JSON_EOF' > package.json
-{
-  "name": "rush-core",
-  "type": "module",
-  "version": "8.0.0",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "astro": "^4.0.0"
-  }
-}
-JSON_EOF
-
-cat << 'MJS_EOF' > astro.config.mjs
-import { defineConfig } from 'astro/config';
-export default defineConfig({
-  srcDir: "./src",
-  publicDir: "./public",
-  outDir: "./dist",
-  server: { port: 3000 }
-});
-MJS_EOF
-
-# 4. Catálogo (Centro de Comando)
-cat <<EOF > src/data/catalog.json
-{
-    "BIORUSH": {
-        "variants": {
-            "ITEM1": { "desc": "", "price": "", "min": 0, "spec": "" },
-            "ITEM2": { "desc": "", "price": "", "min": 0, "spec": "" },
-            "ITEM3": { "desc": "", "price": "", "min": 0, "spec": "" }
-        }
-    },
-    "SUGARRUSH": {
-        "variants": {
-            "ITEM1": { "desc": "", "price": "", "min": 0, "spec": "" },
-            "ITEM2": { "desc": "", "price": "", "min": 0, "spec": "" },
-            "ITEM3": { "desc": "", "price": "", "min": 0, "spec": "" }
-        }
-    }
-}
-EOF
-
-# 4.5. Backend Cerebro (FastAPI con filtro corporativo)
-cat << 'PY_EOF' > main.py
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-import json
-
-app = FastAPI()
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
-
-# Servir documentación estática (Manual de Marca)
-app.mount("/docs", StaticFiles(directory="docs"), name="docs")
-
-def leer_catalogo():
-    with open("src/data/catalog.json", "r") as f:
-        return json.load(f)
-
-@app.get("/api/catalog")
-async def get_catalog():
-    return leer_catalogo()
-
-@app.get("/api/catalog/eventos")
-async def get_eventos():
-    data = leer_catalogo()
-    eventos = {}
-    for cat, content in data.items():
-        v_eventos = {k: v for k, v in content["variants"].items() if v.get("min", 0) >= 20}
-        if v_eventos:
-            eventos[cat] = {"variants": v_eventos}
-    return eventos
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-PY_EOF
-
-cat << 'EOF' > src/pages/index.astro
-
-EOF
-
-# 6. Build
-echo -e "\n${YELLOW}[5/5] Ejecutando build final...${NC}"
-if [ ! -d "node_modules/astro" ]; then
-    npm install
-fi
-
-npx astro sync
-npx astro build
-
-echo -e "${CYAN}🎉 Entorno BioRush listo. Manual disponible en http://localhost:8000/docs/brand/manual.html${NC}"
